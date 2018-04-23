@@ -46,6 +46,25 @@ class App extends Component {
                 letterSpacing: '0.5px',
                 fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto Oxygen-Sans,Ubuntu,Cantarell,“Fira Sans”,“Droid Sans”,Helvetica Neue,Helvetica,Hiragino Kaku Gothic Pro,Meiryo,Arial,sans-serif'
               }}
+              avatarStyle={{
+                "WebkitAnimation": "Lmuha .3s ease forwards",
+                "animation": "Lmuha .3s ease forwards",
+                "borderRadius": "50%",
+                "boxShadow": "none",
+                "height": "40px",
+                "border": "1px solid #eff0f1",
+                "background": "#fff",
+                "minWidth": "40px",
+                "padding": "2px",
+                "WebkitTransform": "scale(0)",
+                "MsTransform": "scale(0)",
+                "transform": "scale(0)",
+                "WebkitTransformOrigin": "bottom right",
+                "MsTransformOrigin": "bottom right",
+                "transformOrigin": "bottom right",
+                "fontFamily": "sans-serif",
+                "letterSpacing": "0.5px"
+              }}
               hideHeader
               hideUserAvatar
               botAvatar={avatar}
@@ -56,7 +75,8 @@ class App extends Component {
           }
         </div>
       </div>
-      <div style={{
+      { false &&
+        <div style={{
         fontFamily: 'monospace',
         background: 'white',
         padding: 20,
@@ -68,19 +88,22 @@ class App extends Component {
         right: 0,
         bottom: 0
       }}>
-        <h4>Debugging:</h4>
-        <button style={{}} disabled onClick={() => {
-          const newSteps = JSON.parse(debugSteps);
-          this.setState({steps: newSteps, debugChange: false})
-        }}>Load</button>
-        <textarea
-          style={{fontFamily: 'monospace', width: '100%', height: 200}}
-          value={debugSteps}
-          onChange={(e) => {
-            this.setState({ debugSteps: e.target.value, debugChange: false });
-          }}
-        />
+        <div>
+          <h4>Debugging:</h4>
+          <button style={{}} disabled onClick={() => {
+            const newSteps = JSON.parse(debugSteps);
+            this.setState({steps: newSteps, debugChange: false})
+          }}>Load</button>
+          <textarea
+            style={{fontFamily: 'monospace', width: '100%', height: 200}}
+            value={debugSteps}
+            onChange={(e) => {
+              this.setState({ debugSteps: e.target.value, debugChange: false });
+            }}
+          />
+        </div>
       </div>
+      }
     </div>
     );
   }
