@@ -19,3 +19,7 @@ Run
 yarn start
 ```
 
+## Deploy
+
+- Install [firebase cli](https://firebase.google.com/docs/cli/)
+- Run `yarn build && firebase deploy` to generate and deploy static app.
