@@ -3,21 +3,24 @@ import './App.css';
 import avatar from './static/bot.jpg';
 import ChatBot from 'react-simple-chatbot';
 
-const defaultSteps = [{
+const defaultSteps = [
+{
   id: 1,
-  message: 'Hello World',
+  message: 'Ahoj, já jsem robot Petr',
   trigger: 2,
 },
 {
   id: 2,
-  message: ({ previousValue, steps }) => 'Hello',
-  trigger: ({ value, steps }) => '3',
+  message: 'Můžu vám pomoci s výběrem knihy?'
 },
 {
   id: 3,
-  message: 'Bye',
-  end: true,
-}];
+  options: [
+    { value: 1, label: 'Jasně!' },
+    { value: 2, label: 'ne'}
+  ],
+},
+];
 
 
 class App extends Component {
@@ -65,7 +68,9 @@ class App extends Component {
                 "fontFamily": "sans-serif",
                 "letterSpacing": "0.5px"
               }}
+              style={{width: '280px'}}
               hideHeader
+              footerStyle={{display: 'none'}}
               hideUserAvatar
               botAvatar={avatar}
               steps={steps}
