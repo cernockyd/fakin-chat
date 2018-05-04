@@ -28,39 +28,24 @@ const theme = {
   fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto Oxygen-Sans,Ubuntu,Cantarell,“Fira Sans”,“Droid Sans”,Helvetica Neue,Helvetica,Hiragino Kaku Gothic Pro,Meiryo,Arial,sans-serif',
   headerBgColor: '#EF6C00',
   headerFontColor: '#fff',
-  headerFontSize: '15px',
+  headerFontSize: '16px',
   botBubbleColor: '#9900FF',
   botFontColor: '#fff',
   userBubbleColor: '#fff',
-  userFontColor: '#727272',
+  userFontColor: '#000',
 };
 
 const App = () => {
   return (
     <div className="App">
-      <div className="BotWrapper" style={{marginTop: 40}}>
+      <div className="BotWrapper">
         <ThemeProvider theme={theme}>
           <ChatBot
-            avatarStyle={{
-              "WebkitAnimation": "Lmuha .3s ease forwards",
-              "animation": "Lmuha .3s ease forwards",
-              "borderRadius": "50%",
-              "boxShadow": "none",
-              "height": "40px",
-              "border": "1px solid #eff0f1",
-              "background": "#fff",
-              "minWidth": "40px",
-              "padding": "2px",
-              "WebkitTransform": "scale(0)",
-              "MsTransform": "scale(0)",
-              "transform": "scale(0)",
-              "WebkitTransformOrigin": "bottom right",
-              "MsTransformOrigin": "bottom right",
-              "transformOrigin": "bottom right",
-              "fontFamily": "sans-serif",
-              "letterSpacing": "0.5px"
+            bubbleStyle={{
+              boxShadow: 'none',
+              borderBottom: '1px solid #ccc'
             }}
-            style={{width: '280px'}}
+            style={{boxShadow: 'none', width: 320}}
             hideHeader
             footerStyle={{display: 'none'}}
             hideUserAvatar
