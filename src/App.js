@@ -1,26 +1,42 @@
 import React, { Component } from 'react';
+import './App.css';
+import logo from './static/logo.png';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
-import './App.css';
+import DynamicQuestion from './components/DynamicQuestion';
+import GetRandomMessage from './lib/MessagesHelper';
 
 const defaultSteps = [
   {
-    id: 1,
-    message: 'Ahoj, já jsem robot Petr',
-    trigger: 2,
+    id: 'SayHi',
+    message: GetRandomMessage('SayHi'),
+    trigger: 'SayHi2'
   },
   {
-    id: 2,
-    trigger: 3,
-    message: 'Můžu vám pomoci s výběrem knihy?'
+    id: 'SayHi2',
+    message: GetRandomMessage('SayHi2'),
+    trigger: 'intent1'
   },
   {
-    id: 3,
+    id: 'intent1',
     options: [
-      { value: 1, label: 'Jasně!' },
-      { value: 2, label: 'ne'}
-    ],
+        { value: 'true', label: GetRandomMessage('yes1'), trigger: 'intent' },
+        { value: 'false', label: GetRandomMessage('no1'), trigger: 'dummy' }
+    ]
   },
+  {
+    id: 'dummy',
+    message: GetRandomMessage('dummy'),
+    end: true
+  },
+  {
+    id: 'intent',
+    component: <DynamicQuestion />,
+    replace: true,
+    waitAction: true,
+    asMessage: true,
+    trigger: 'intent'
+  }
 ];
 
 const theme = {
@@ -39,10 +55,14 @@ const App = () => {
   return (
     <div className="App">
       <div className="BotWrapper">
+        <a href="/"><img src={logo} className="logo" /></a>
         <ThemeProvider theme={theme}>
           <ChatBot
             bubbleStyle={{
-              boxShadow: 'none',
+              lineHeight: 1.25,
+              borderRadius: '18px',
+              fontSize: '16px',
+              padding: '8px 12px',
               borderBottom: '1px solid #ccc'
             }}
             style={{boxShadow: 'none', width: 320}}
