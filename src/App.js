@@ -11,6 +11,8 @@ import { isLocalhost } from './registerServiceWorker';
 
 const SayHi = GetRandomMessage('SayHi');
 const SayHi2 = GetRandomMessage('SayHi2');
+const SayHi3 = GetRandomMessage('SayHi3');
+const SayHi4 = GetRandomMessage('SayHi4');
 
 const stepsWithState = (state) => {
   const { actions, neco, text } = state;
@@ -29,9 +31,21 @@ const stepsWithState = (state) => {
       trigger: 'ask1'
     },
     {
+      id: 'SayHi3',
+      message: SayHi3,
+      delay: SayHi3.length*0,
+      trigger: 'SayHi4'
+    },
+    {
+      id: 'SayHi4',
+      message: SayHi4,
+      delay: SayHi4.length*0,
+      trigger: 'loop'
+    },
+    {
       id: 'ask1',
       options: [
-          { value: 'true', label: GetRandomMessage('yes1'), trigger: 'loop' },
+          { value: 'true', label: GetRandomMessage('yes1'), trigger: 'SayHi3' },
           { value: 'false', label: GetRandomMessage('no1'), trigger: 'dummy' }
       ],
     },
@@ -83,8 +97,10 @@ class App extends Component {
     this.state = {
       features: {
         mood: null,
-        genre: null,
-
+        category: null,
+        images: null,
+        type: null,
+        pages: null
       },
       messages: [],
       actions: {

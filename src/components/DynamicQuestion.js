@@ -1,6 +1,7 @@
 import ChatBot, { Loading } from 'react-simple-chatbot'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import GetRandomMessage from '../lib/MessagesHelper';
 
 export default class DynamicQuestion extends Component {
 
@@ -16,28 +17,52 @@ export default class DynamicQuestion extends Component {
 
     this.setThatState = this.props.actions.setState;
 
-    console.log('triggered: DynamicQuestion');
-    console.log('previousStep:', props.previousStep);
+    // console.log('triggered: DynamicQuestion');
+    // console.log('previousStep:', props.previousStep);
 
-    console.log(this.props.actions);
+    // console.log(this.props.actions);
 
     this.setNextMessage = this.setNextMessage.bind(this);
     this.messageController = this.messageController.bind(this);
   }
 
   messageController() {
-    const { steps, actions } = this.props;
+    const { features, actions } = this.props;
     let messages = this.props.messages;
     const { setState, getState } = actions;
+    let featureKey = '';
 
-    this.setMessage('cauky');
+    let nullFeatures = this.validateFeatures(features);
+    if (nullFeatures.length > 0) {
+      featureKey = this.getRandomFeature(nullFeatures);
+    }
+
+    this.setMessage(GetRandomMessage(featureKey));
+
+
+    //console.log(GetRandomMessage(this.getRandomFeature(nullFeatures)));
+
+    //this.setMessage('cauky');
 
     //messages.push('neco jineho :D');
 
     //const nextStep = messages.length < 10 ? 'showMessage' : 'showMessageEnd';
 
-    this.setNextMessage('ahojky');
 
+  }
+
+  validateFeatures(features) {
+    let arr = [];
+    for (var key in features) {
+      if (features.hasOwnProperty(key) && features[key] == null) {
+        arr.push(key);
+      }
+    }
+    return arr;
+  }
+
+  getRandomFeature(features) {
+    return features[Math.floor(Math.random() * features.length)];
   }
 
   setMessage(message) {
