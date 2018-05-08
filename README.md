@@ -19,6 +19,19 @@ Run
 yarn start
 ```
 
+## Fetch books metadata
+Books metadata are fetched from Google Books API.
+You may need to
+
+- Set up Google Cloud project
+- [Generate API key](https://support.google.com/cloud/answer/6158862)
+- Enable [Google Books API](https://console.cloud.google.com/apis/dashboard) within your project
+
+Call this with your Google Books API key
+```
+node FetchMetadata.js <GOOGLE BOOKS API KEY>
+```
+
 ## Deploy
 
 - Install [firebase cli](https://firebase.google.com/docs/cli/)
