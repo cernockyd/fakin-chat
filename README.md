@@ -21,16 +21,23 @@ yarn start
 
 ## Fetch books metadata
 Books metadata are fetched from Google Books API.
-You may need to
+
+You may need to:
 
 - Set up Google Cloud project
 - [Generate API key](https://support.google.com/cloud/answer/6158862)
 - Enable [Google Books API](https://console.cloud.google.com/apis/dashboard) within your project
 
-Call this with your Google Books API key
+Call this with your Google Books API key to fetch data
+```bash
+node DataHelper.js fetch <GOOGLE BOOKS API KEY>
 ```
-node FetchMetadata.js <GOOGLE BOOKS API KEY>
+
+Process fetched data
+```bash
+node DataHelper.js process
 ```
+
 
 ## Deploy
 
