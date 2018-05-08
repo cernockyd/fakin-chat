@@ -23,11 +23,12 @@ export default class DynamicQuestion extends Component {
     // console.log(this.props.actions);
 
     this.setNextMessage = this.setNextMessage.bind(this);
+    this.setRecommendaiton = this.setRecommendaiton.bind(this);
     this.messageController = this.messageController.bind(this);
   }
 
   messageController() {
-    const { features, actions } = this.props;
+    const { features, actions, books } = this.props;
     let messages = this.props.messages;
     const { setState, getState } = actions;
     let featureKey = '';
@@ -39,14 +40,17 @@ export default class DynamicQuestion extends Component {
 
     this.setMessage(GetRandomMessage(featureKey));
 
+    if (books.length == 0) {
+      this.setRecommendaiton({
+        image: 'http://www.levneknihkupectvi.cz/images/products/22397.jpg',
+        name: 'Lovci mamutů',
+        author: 'Eduard Štorch',
+        description: 'popisssss'
+      });
+    }
 
-    //console.log(GetRandomMessage(this.getRandomFeature(nullFeatures)));
+    this.setMessage(GetRandomMessage(featureKey));
 
-    //this.setMessage('cauky');
-
-    //messages.push('neco jineho :D');
-
-    //const nextStep = messages.length < 10 ? 'showMessage' : 'showMessageEnd';
 
 
   }
@@ -71,7 +75,15 @@ export default class DynamicQuestion extends Component {
 
     this.setThatState({messages: messages});
     this.setState({ loading: false, result: message });
+  }
 
+  setRecommendaiton(book) {
+    let books = this.props.books;
+    books.push(book);
+    this.setThatState({books: books});
+    if (book) {
+      this.props.triggerNextStep({ trigger: 'showBook', value: null });
+    }
   }
 
   setNextMessage(message) {

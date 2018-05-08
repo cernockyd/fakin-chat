@@ -5,7 +5,8 @@ import logo from './static/logo.png';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
-import ShowMessage from './components/ShowMessage';
+import Message from './components/Message';
+import Book from './components/Book';
 import GetRandomMessage from './lib/MessagesHelper';
 import { isLocalhost } from './registerServiceWorker';
 
@@ -17,29 +18,31 @@ const SayHi4 = GetRandomMessage('SayHi4');
 const stepsWithState = (state) => {
   const { actions, neco, text } = state;
 
+  const time = isLocalhost ? 0 : 80;
+
   return [
     {
       id: 'SayHi',
       message: SayHi,
-      delay: SayHi.length*0,
+      delay: SayHi.length*time,
       trigger: 'SayHi2'
     },
     {
       id: 'SayHi2',
       message: SayHi2,
-      delay: SayHi2.length*0,
+      delay: SayHi2.length*time,
       trigger: 'ask1'
     },
     {
       id: 'SayHi3',
       message: SayHi3,
-      delay: SayHi3.length*0,
+      delay: SayHi3.length*time,
       trigger: 'SayHi4'
     },
     {
       id: 'SayHi4',
       message: SayHi4,
-      delay: SayHi4.length*0,
+      delay: SayHi4.length*time,
       trigger: 'loop'
     },
     {
@@ -64,15 +67,21 @@ const stepsWithState = (state) => {
     },
     {
       id: 'showMessage',
-      component: <ShowMessage messages={state.messages} />,
+      component: <Message messages={state.messages} />,
       asMessage: true,
       trigger: 'loop',
     },
     {
       id: 'showMessageEnd',
-      component: <ShowMessage messages={state.messages} />,
+      component: <Message messages={state.messages} />,
       asMessage: true,
       end: true,
+    },
+    {
+      id: 'showBook',
+      component: <Book books={state.books} />,
+      asMessage: false,
+      trigger: 'loop',
     },
   ];
 }
@@ -83,7 +92,7 @@ const theme = {
   headerBgColor: '#EF6C00',
   headerFontColor: '#fff',
   headerFontSize: '16px',
-  botBubbleColor: '#9900FF',
+  botBubbleColor: '#000',
   botFontColor: '#fff',
   userBubbleColor: '#fff',
   userFontColor: '#000',
@@ -103,6 +112,7 @@ class App extends Component {
         pages: null
       },
       messages: [],
+      books: [],
       actions: {
         setState: (obj) => this.setState(obj),
         getState: this.getState.bind(this)
@@ -119,7 +129,7 @@ class App extends Component {
     return (
       <div className="App">
       <div className="BotWrapper">
-        <a href="/"><img src={logo} className="logo" /></a>
+        {!isLocalhost && <a href="/"><img src={logo} className="logo" /></a>}
         <ThemeProvider theme={theme}>
           <ChatBot
             bubbleStyle={{
