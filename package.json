@@ -15,5 +15,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "csv-parse": "^2.4.0",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^2.1.2"
   }
 }
