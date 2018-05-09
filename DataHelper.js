@@ -73,11 +73,17 @@ function ProcessMetadata() {
     }
     type = possibleTypes.indexOf(type);
 
+    // split themes
+    var parsedThemes = theme.split(', ');
     // assign ThemeID
-    if (possibleThemes.indexOf(theme) === -1) {
-      possibleThemes.push(theme);
-    }
-    theme = possibleThemes.indexOf(theme);
+    var currentThemes = [];
+    parsedThemes.forEach(function(theme) {
+      if (possibleThemes.indexOf(theme) === -1) {
+        possibleThemes.push(theme);
+      }
+      currentThemes.push(possibleThemes.indexOf(theme));
+    });
+
 
     // split categories
     var parsedCategories = categories.split(', ');
@@ -97,7 +103,7 @@ function ProcessMetadata() {
       pages,
       type,
       categories: currentCategories[0],
-      theme,
+      theme: currentThemes[0],
       mood,
       images
     };
@@ -107,11 +113,18 @@ function ProcessMetadata() {
   fs.writeFile(outputFileProcessed, JSON.stringify(newData), function (err) {
     if (err) return console.log(err);
     console.log('------------------');
-    console.log('possibleCategories:', possibleCategories);
+    console.log('possibleCategories:');
+    var jsonSomething = [];
+    possibleCategories.forEach((cat, i) => {
+      jsonSomething.push({value: i, label: cat, trigger: 'loop'});
+    });
+    console.log(jsonSomething);
     console.log('------------------');
     console.log('possibleTypes:', possibleTypes);
     console.log('------------------');
     console.log('possibleMood:', possibleMood);
+    console.log('------------------');
+    console.log('possiblThemes:', possibleThemes);
     console.log('------------------');
     var randomIndex = Math.floor(Math.random() * data.length);
     console.log('Old Data Sample:', data[randomIndex]);
