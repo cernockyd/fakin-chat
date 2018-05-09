@@ -15,11 +15,11 @@ class Message extends Component {
   }
 
   componentDidMount() {
-    if (!isLocalhost)
-      setTimeout(() => {
-        this.setState({loading: false});
-        this.props.triggerNextStep();
-      }, this.state.value.length*70);
+
+    setTimeout(() => {
+      this.setState({loading: false});
+      this.props.triggerNextStep();
+    }, !isLocalhost ? this.state.value.length*70 : 0);
   }
 
   render() {
