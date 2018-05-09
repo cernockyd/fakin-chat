@@ -1,9 +1,8 @@
-import ChatBot, { Loading } from 'react-simple-chatbot'
+import { Loading } from 'react-simple-chatbot'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import GetRandomMessage, { GetRandomQuestion } from '../lib/MessagesHelper';
+import { GetRandomQuestion } from '../lib/MessagesHelper';
 import Recommend from '../lib/Recommend';
-import data from '../data.json';
 
 export default class DynamicQuestion extends Component {
 
@@ -32,7 +31,6 @@ export default class DynamicQuestion extends Component {
 
   messageController() {
     let { actions } = this.props;
-    let messages = this.props.messages;
     const { setState, getState } = actions;
     let featureKey = '';
     let waitAnswer = getState('waitAnswer');
@@ -61,7 +59,7 @@ export default class DynamicQuestion extends Component {
 
     } else if (currentContext === '' && !waitAnswer) {
 
-      if (books.length == 0) {
+      if (books.length === 0) {
         const recommendation = Recommend(features, 1);
 
         recommendation.then((result) => this.setRecommendaiton(result));

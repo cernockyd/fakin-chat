@@ -16,8 +16,6 @@ const SayHi3 = GetRandomMessage('SayHi3');
 const SayHi4 = GetRandomMessage('SayHi4');
 
 const stepsWithState = (state) => {
-  const { actions, neco, text } = state;
-
   const time = isLocalhost ? 0 : 80;
 
   return [
@@ -139,7 +137,7 @@ class App extends Component {
     return (
       <div className="App">
       <div className="BotWrapper">
-        {!isLocalhost && <a href="/"><img src={logo} className="logo" /></a>}
+        {!isLocalhost && <a href="/"><img src={logo} alt="logo" className="logo" /></a>}
         <ThemeProvider theme={theme}>
           <ChatBot
             bubbleStyle={{
