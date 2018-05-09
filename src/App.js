@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import JSONPretty from 'react-json-pretty';
 import logo from './static/logo.png';
+import bot from './static/bot.png';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
@@ -151,9 +152,28 @@ class App extends Component {
             hideHeader
             footerStyle={{display: 'none'}}
             hideUserAvatar
+            botAvatar={bot}
+            avatarStyle={{
+              "WebkitAnimation": "Lmuha .3s ease forwards",
+              "animation": "Lmuha .3s ease forwards",
+              "borderRadius": "50%",
+              "boxShadow": "none",
+              "height": "40px",
+              "border": "1px solid #eff0f1",
+              "background": "#fff",
+              "minWidth": "40px",
+              "padding": "2px",
+              "WebkitTransform": "scale(0)",
+              "MsTransform": "scale(0)",
+              "transform": "scale(0)",
+              "WebkitTransformOrigin": "bottom right",
+              "MsTransformOrigin": "bottom right",
+              "transformOrigin": "bottom right",
+              "fontFamily": "sans-serif",
+              "letterSpacing": "0.5px"
+            }}
             userDelay={0}
-            botDelay={0}
-            hideBotAvatar
+            botDelay={isLocalhost ? 1000 : 0}
             steps={stepsWithState(this.state)}
           />
         </ThemeProvider>
