@@ -88,8 +88,67 @@ const stepsWithState = (state) => {
     {
       id: 'Actionpages',
       options: [
-          { value: 'true', label: GetRandomAnswer('pages', 'true'), trigger: 'loop' },
-          { value: 'false', label: GetRandomAnswer('pages', 'false'), trigger: 'loop' }
+          { value: 1, label: GetRandomAnswer('pages', 'true'), trigger: 'loop' },
+          { value: 0, label: GetRandomAnswer('pages', 'false'), trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actiontype',
+      options: [
+          { value: 0, label: 'Próza', trigger: 'loop' },
+          { value: 1, label: 'Drama', trigger: 'loop' },
+          { value: 2, label: 'Poezie', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actiontheme',
+      options: [
+          { value: 0, label: 'Život', trigger: 'loop' },
+          { value: 1, label: 'Příroda', trigger: 'loop' },
+          { value: 2, label: 'Válka', trigger: 'loop' },
+          { value: 3, label: 'Volnočasové aktivity', trigger: 'loop' },
+          { value: 4, label: 'Komunizmus', trigger: 'loop' },
+          { value: 5, label: 'Náboženství', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actioncategories',
+      options: [
+        { value: 0, label: 'historický román', trigger: 'loop' },
+        { value: 1, label: 'román', trigger: 'loop' },
+        //{ value: 2, label: 'humoristický román', trigger: 'loop' },
+        { value: 3, label: 'komedii', trigger: 'loop' },
+        { value: 4, label: 'sci-fi', trigger: 'loop' },
+        { value: 5, label: 'naučnou literaturu', trigger: 'loop' },
+        //{ value: 6, label: ':(', trigger: 'loop' },
+        { value: 7, label: 'literaturu pro děti', trigger: 'loop' },
+        //{ value: 8, label: 'eseje', trigger: 'loop' },
+        { value: 9, label: 'pohádky', trigger: 'loop' },
+        //{ value: 10, label: 'biografický román', trigger: 'loop' },
+        { value: 11, label: 'dobrodružný román', trigger: 'loop' },
+        //{ value: 12, label: 'deníky', trigger: 'loop' },
+        //{ value: 13, label: 'povídky', trigger: 'loop' },
+        { value: 14, label: 'absurdní drama', trigger: 'loop' },
+        { value: 15, label: 'autobiografický román', trigger: 'loop' },
+        //{ value: 16, label: 'novela', trigger: 'loop' },
+        { value: 17, label: 'tragédii', trigger: 'loop' },
+        //{ value: 18, label: 'duchovní literatura', trigger: 'loop' },
+        //{ value: 19, label: 'dopisy', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actionmood',
+      options: [
+          { value: 1, label: 'Šťastné', trigger: 'loop' },
+          { value: 2, label: 'Smutné', trigger: 'loop' },
+          { value: 0, label: 'Něco mezi', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actionimages',
+      options: [
+          { value: 0, label: GetRandomAnswer('images', 'true'), trigger: 'loop' },
+          { value: 1, label: GetRandomAnswer('images', 'false'), trigger: 'loop' }
       ],
     },
   ];
@@ -141,12 +200,10 @@ class App extends Component {
     return (
       <div className="App">
       <div className="BotWrapper">
-        {!isLocalhost && <a href="/"><img src={logo} alt="logo" className="logo" /></a>}
         <ThemeProvider theme={theme}>
           <ChatBot
             bubbleStyle={{
               lineHeight: 1.25,
-              borderRadius: '18px',
               fontSize: '16px',
               padding: '8px 12px'
             }}
@@ -161,6 +218,7 @@ class App extends Component {
               "borderRadius": "50%",
               "boxShadow": "none",
               "height": "40px",
+              "float": "left",
               "border": "1px solid #eff0f1",
               "background": "#fff",
               "minWidth": "40px",

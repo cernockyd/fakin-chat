@@ -34,7 +34,7 @@ export default {
   ],
   mood: {
     questions: [
-      'Jak se cítíš?'
+      'Jaké knihy vyhledáváš?'
     ]
   },
   categories: {
@@ -49,8 +49,19 @@ export default {
   },
   images: {
     questions: [
-      'Máš rád/a ilustrované knihy?'
-    ]
+      'Upřednostňuješ ilustrované knihy?'
+    ],
+    answers: {
+      true: [
+        'ano',
+        'Ano!',
+        'Jo.',
+      ],
+      false: [
+        'ne',
+        'raději bez obrázků',
+      ]
+    }
   },
   type: {
     questions: [
