@@ -33,7 +33,6 @@ export default class DynamicQuestion extends Component {
     let { actions } = this.props;
     const { setState, getState } = actions;
     let featureKey = '';
-    let messages = getState('messages');
     let waitAnswer = getState('waitAnswer');
     let currentContext = getState('currentContext');
     let features = getState('features');
@@ -47,21 +46,27 @@ export default class DynamicQuestion extends Component {
     // think of this „if, else if“ block below as messages router
 
     // if not waiting for answer
-    if (!waitAnswer && nullFeatures.length > 0) {
+    if (!waitAnswer && currentContext === '' && nullFeatures.length > 0) {
       featureKey = this.getRandomFeature(nullFeatures);
       setState({ features, currentContext: featureKey, waitAnswer: true });
       this.setNextMessage(GetRandomQuestion(featureKey));
 
     } else if (currentContext !== '' && waitAnswer) {
-
-      const currentMessage = messages[messages.length-1];
-
-      this.setNextAction('pages');
       featureKey = currentContext;
-      features[featureKey] = 0;
-      setState({waitAnswer: false, features: features, currentContext: ''});
+      setState({waitAnswer: false});
+      this.setNextAction(featureKey);
 
-    } else if (currentContext === '' && !waitAnswer) {
+    } else if (currentContext !== '' && !waitAnswer) {
+
+      const key = 'Action'+currentContext;
+      const lastValue = this.props.steps[key].value;
+      console.log(lastValue);
+      features[currentContext] = lastValue;
+      setState({currentContext: '', features: features});
+
+      this.props.triggerNextStep();
+
+    } else if (!waitAnswer && nullFeatures.length === 0) {
 
       if (books.length === 0) {
         const recommendation = Recommend(features, 1);
