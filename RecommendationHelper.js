@@ -14,6 +14,7 @@ var features = {
   pages:0,
   type:0,
   theme:0,
+  categories: 0,
   mood:0,
   images:0
 };
@@ -21,7 +22,7 @@ console.log(features);
 
 console.time('test1');
 process.stdout.write("\n \n \n k-Nearest Neighbour queries: \n\n");
-var tree = new LA(data, {attributes: ['pages', 'type', 'theme', 'mood', 'images' ]});
+var tree = new LA(data, {attributes: ['pages', 'type', 'categories', 'theme', 'mood', 'images' ]});
 
 try {
   var recommendation = tree.query(features, {k:3});

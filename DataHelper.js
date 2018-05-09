@@ -90,11 +90,13 @@ function ProcessMetadata() {
       currentCategories.push(possibleCategories.indexOf(category));
     });
 
+    // Todo: (hack) reduce array and create standalone item with each category
+
     return {
       name,
       pages,
       type,
-      categories: currentCategories,
+      categories: currentCategories[0],
       theme,
       mood,
       images
