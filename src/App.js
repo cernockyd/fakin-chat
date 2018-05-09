@@ -148,10 +148,9 @@ class App extends Component {
               lineHeight: 1.25,
               borderRadius: '18px',
               fontSize: '16px',
-              padding: '8px 12px',
-              borderBottom: '1px solid #ccc'
+              padding: '8px 12px'
             }}
-            style={{boxShadow: 'none', width: 320}}
+            style={{boxShadow: 'none', width: '100%', borderRadius: 0}}
             hideHeader
             footerStyle={{display: 'none'}}
             hideUserAvatar
@@ -188,7 +187,7 @@ class App extends Component {
             background: '#000',
             color: '#fff',
             padding: 0,
-            position: 'absolute',
+            position: 'fixed',
             width: 300,
             zIndex: 10000,
             top: 0,
