@@ -6,8 +6,6 @@ class Message extends Component {
     super();
     const text = props.messages;
 
-    console.log(text);
-
     this.state = {
       value: text[text.length-1]
     }

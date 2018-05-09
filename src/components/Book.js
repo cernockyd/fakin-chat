@@ -13,17 +13,18 @@ class Book extends Component {
   }
 
   render() {
-    const { image, name, author, description } = this.state.book;
+    const { thumbnail, name, author, description } = this.state.book;
 
     return (
       <div className="recommendation">
-        <div className="img-wrapper">
-          <div className="img" style={{backgroundImage: 'url('+image+')'}}></div>
-        </div>
-
+        { thumbnail &&
+          <div className="img-wrapper">
+            <div className="img" style={{backgroundImage: 'url('+thumbnail+')'}}></div>
+          </div>
+        }
         <h2 className="headline">{name}</h2>
         <p className="author">{author}</p>
-        <p className="description">{description}</p>
+        { description && <p className="description">{description}</p> }
       </div>
     )
   }

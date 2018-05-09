@@ -8,3 +8,13 @@ export default function GetRandomMessage(key) {
   const MessageArray = Messages[key];
   return MessageArray[Math.floor(Math.random() * MessageArray.length)];
 }
+
+export function GetRandomAnswer(key, option) {
+  const MessageArray = Messages[key]['answers'][option];
+  return MessageArray[Math.floor(Math.random() * MessageArray.length)];
+}
+
+export function GetRandomQuestion(key) {
+  const MessageArray = Messages[key]['questions'];
+  return MessageArray[Math.floor(Math.random() * MessageArray.length)];
+}

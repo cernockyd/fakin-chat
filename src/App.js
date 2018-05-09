@@ -7,7 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
 import Message from './components/Message';
 import Book from './components/Book';
-import GetRandomMessage from './lib/MessagesHelper';
+import GetRandomMessage, { GetRandomAnswer } from './lib/MessagesHelper';
 import { isLocalhost } from './registerServiceWorker';
 
 const SayHi = GetRandomMessage('SayHi');
@@ -60,7 +60,7 @@ const stepsWithState = (state) => {
     {
       id: 'loop',
       component: <DynamicQuestion {...state} />,
-      replace: false,
+      replace: true,
       waitAction: true,
       asMessage: true,
       trigger: 'loop',
@@ -83,6 +83,13 @@ const stepsWithState = (state) => {
       asMessage: false,
       trigger: 'loop',
     },
+    {
+      id: 'Actionpages',
+      options: [
+          { value: 'true', label: GetRandomAnswer('pages', 'true'), trigger: 'loop' },
+          { value: 'false', label: GetRandomAnswer('pages', 'false'), trigger: 'loop' }
+      ],
+    },
   ];
 }
 
@@ -92,7 +99,7 @@ const theme = {
   headerBgColor: '#EF6C00',
   headerFontColor: '#fff',
   headerFontSize: '16px',
-  botBubbleColor: '#000',
+  botBubbleColor: '#FF9900',
   botFontColor: '#fff',
   userBubbleColor: '#fff',
   userFontColor: '#000',
@@ -105,12 +112,15 @@ class App extends Component {
 
     this.state = {
       features: {
-        mood: null,
-        category: null,
-        images: null,
+        pages: null,
         type: null,
-        pages: null
+        theme: null,
+        categories: null,
+        mood: null,
+        images: null
       },
+      currentContext: '',
+      waitAnswer: false,
       messages: [],
       books: [],
       actions: {
@@ -158,7 +168,7 @@ class App extends Component {
             color: '#fff',
             padding: 0,
             position: 'absolute',
-            width: 200,
+            width: 300,
             zIndex: 10000,
             top: 0,
             margin: 0,

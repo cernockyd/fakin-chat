@@ -1,7 +1,8 @@
 import ChatBot, { Loading } from 'react-simple-chatbot'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import GetRandomMessage from '../lib/MessagesHelper';
+import GetRandomMessage, { GetRandomQuestion } from '../lib/MessagesHelper';
+import data from '../data.json';
 
 export default class DynamicQuestion extends Component {
 
@@ -23,34 +24,53 @@ export default class DynamicQuestion extends Component {
     // console.log(this.props.actions);
 
     this.setNextMessage = this.setNextMessage.bind(this);
+    this.setNextAction = this.setNextAction.bind(this);
     this.setRecommendaiton = this.setRecommendaiton.bind(this);
     this.messageController = this.messageController.bind(this);
   }
 
   messageController() {
-    const { features, actions, books } = this.props;
+    let { actions } = this.props;
     let messages = this.props.messages;
     const { setState, getState } = actions;
     let featureKey = '';
+    let waitAnswer = getState('waitAnswer');
+    let currentContext = getState('currentContext');
+    let features = getState('features');
+    let books = getState('books');
 
-    let nullFeatures = this.validateFeatures(features);
-    if (nullFeatures.length > 0) {
+    let nullFeatures = [];
+    nullFeatures = this.validateFeatures(features);
+
+    console.log(nullFeatures);
+
+    console.log();
+
+    // if not waiting for answer
+    if (!waitAnswer && nullFeatures.length > 0) {
       featureKey = this.getRandomFeature(nullFeatures);
+      setState({ features, currentContext: featureKey, waitAnswer: true });
+      this.setNextMessage(GetRandomQuestion(featureKey));
+
+    } else if (currentContext !== '' && waitAnswer) {
+      this.setNextAction('pages');
+      featureKey = currentContext;
+      features[featureKey] = 0;
+      setState({waitAnswer: false, features: features, currentContext: ''});
+
+    } else if (currentContext === '' && !waitAnswer) {
+
+      if (books.length == 0) {
+
+
+
+      } else {
+        this.setNextMessage('Konec', true);
+      }
+
     }
 
-    this.setMessage(GetRandomMessage(featureKey));
-
-    if (books.length == 0) {
-      this.setRecommendaiton({
-        image: 'http://www.levneknihkupectvi.cz/images/products/22397.jpg',
-        name: 'Lovci mamutů',
-        author: 'Eduard Štorch',
-        description: 'popisssss'
-      });
-    }
-
-    this.setMessage(GetRandomMessage(featureKey));
-
+    //this.setMessage(GetRandomMessage(featureKey));
 
 
   }
@@ -81,21 +101,30 @@ export default class DynamicQuestion extends Component {
     let books = this.props.books;
     books.push(book);
     this.setThatState({books: books});
+
     if (book) {
       this.props.triggerNextStep({ trigger: 'showBook', value: null });
     }
   }
 
-  setNextMessage(message) {
+  setNextMessage(message, end = false) {
     let messages = this.props.messages;
     messages.push(message);
 
     this.setThatState({ messages: messages });
 
-    const nextStep = this.props.messages.length < 10 ? 'showMessage' : 'showMessageEnd';
+    const nextStep = (!end) ? 'showMessage' : 'showMessageEnd';
 
     if (message) {
       this.props.triggerNextStep({ trigger: nextStep, value: null });
+    } else {
+      this.props.triggerNextStep();
+    }
+  }
+
+  setNextAction(context) {
+    if (context) {
+      this.props.triggerNextStep({ trigger: 'Action'+context, value: null });
     } else {
       this.props.triggerNextStep();
     }

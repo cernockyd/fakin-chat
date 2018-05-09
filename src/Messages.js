@@ -32,19 +32,46 @@ export default {
     'Nevadí :(',
     'Tak jo 😢',
   ],
-  mood: [
-    'Jak se cítíš?'
-  ],
-  category: [
-    'Jaký žánr máš nejraději?'
-  ],
-  images: [
-    'Máš rád/a ilustrované knihy?'
-  ],
-  type: [
-    'Čteš poezii?'
-  ],
-  pages: [
-    'Považuješ se za častého čtenáře?'
-  ]
+  mood: {
+    questions: [
+      'Jak se cítíš?'
+    ]
+  },
+  categories: {
+    questions: [
+      'Jaký žánr máš nejraději?'
+    ]
+  },
+  theme: {
+    questions: [
+      'Jaké téma tě nějvíce zajímá?'
+    ]
+  },
+  images: {
+    questions: [
+      'Máš rád/a ilustrované knihy?'
+    ]
+  },
+  type: {
+    questions: [
+      'Čteš poezii?'
+    ]
+  },
+  pages: {
+    questions: [
+      'Považuješ se za častého čtenáře?'
+    ],
+    answers: {
+      true: [
+        'ano',
+        'Jasně',
+        'Jo.',
+      ],
+      false: [
+        'ne',
+        'moc nečtu',
+        'čtu málo'
+      ]
+    }
+  }
 };
