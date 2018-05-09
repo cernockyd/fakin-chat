@@ -56,7 +56,7 @@ function ProcessMetadata() {
   var possibleThemes = [];
 
   var newData = data.map(function(book, i) {
-    let { pages, type, categories, theme, mood, year, images } = book;
+    let { name, pages, type, categories, theme, mood, year, images } = book;
 
     pages = (pages > 200) ? 0 : 1;
     images = (images === 'TRUE') ? 0 : 1;
@@ -91,6 +91,7 @@ function ProcessMetadata() {
     });
 
     return {
+      name,
       pages,
       type,
       categories: currentCategories,
