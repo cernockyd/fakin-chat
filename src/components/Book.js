@@ -24,7 +24,7 @@ class Book extends Component {
         }
         <h2 className="headline">{name}</h2>
         <p className="author">{author}</p>
-        { description && <p className="description">{description}</p> }
+        { description && <p className="description">{ description.length > 140 ? <span>{description.substr(0, 140)}&hellip;</span> : description  }</p> }
       </div>
     )
   }
