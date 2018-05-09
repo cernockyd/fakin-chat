@@ -50,4 +50,19 @@ node DataHelper.js process
 ## Deploy
 
 - Install [firebase cli](https://firebase.google.com/docs/cli/)
-- Run `yarn build && firebase deploy` to generate and deploy static app.
+- Run `yarn build` before deploy to generate static app.
+
+Change (select) enviroment
+```bash
+firebase use default # default (for staging) or production
+```
+
+Deploy to selected enviroment
+```bash
+firebase deploy
+```
+
+Deploy to production
+```bash
+firebase deploy -P production
+```
