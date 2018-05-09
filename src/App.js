@@ -60,6 +60,7 @@ const stepsWithState = (state) => {
       id: 'loop',
       component: <DynamicQuestion {...state} />,
       replace: true,
+      delay: 0,
       waitAction: true,
       asMessage: true,
       trigger: 'loop',
@@ -173,7 +174,7 @@ class App extends Component {
               "letterSpacing": "0.5px"
             }}
             userDelay={0}
-            botDelay={isLocalhost ? 1000 : 0}
+            botDelay={isLocalhost ? 0 : 1000}
             steps={stepsWithState(this.state)}
           />
         </ThemeProvider>

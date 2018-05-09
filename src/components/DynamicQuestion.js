@@ -140,7 +140,7 @@ export default class DynamicQuestion extends Component {
     const { loading, result } = this.state
 
     if (loading) {
-      return <Loading />
+      return <Loading />;
     } else {
       return result;
     }
