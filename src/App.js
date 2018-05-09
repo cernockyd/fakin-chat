@@ -17,7 +17,7 @@ const SayHi3 = GetRandomMessage('SayHi3');
 const SayHi4 = GetRandomMessage('SayHi4');
 
 const stepsWithState = (state) => {
-  const time = isLocalhost ? 0 : 80;
+  const time = isLocalhost ? 0 : 70;
 
   return [
     {
@@ -69,6 +69,8 @@ const stepsWithState = (state) => {
       id: 'showMessage',
       component: <Message messages={state.messages} />,
       asMessage: true,
+      waitAction: true,
+      delay: 0,
       trigger: 'loop',
     },
     {
