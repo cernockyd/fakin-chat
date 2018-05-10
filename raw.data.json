@@ -11,7 +11,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Fráňa ŠRÁMEK (1877-1952)",
+    "author": "Fráňa ŠRÁMEK",
     "name": "Stříbrný vítr",
     "pages": 245,
     "type": "próza",
@@ -22,7 +22,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jiří MAHEN (1882-1939)",
+    "author": "Jiří MAHEN",
     "name": "Měsíc",
     "pages": 90,
     "type": "próza",
@@ -33,7 +33,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Jaroslav HAŠEK (1983-1923)",
+    "author": "Jaroslav HAŠEK",
     "name": "Osudy dobrého vojáka Švejka za světové války",
     "pages": 228,
     "type": "próza",
@@ -77,7 +77,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Tomáš Garrigue MASARYK (1850-1937)",
+    "author": "Tomáš Garrigue MASARYK",
     "name": "Světová revoluce",
     "pages": 639,
     "type": "próza",
@@ -121,7 +121,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Josef ĆAPEK (1887-1945)",
+    "author": "Josef ĆAPEK",
     "name": "Povídání o pejskovi a kočičce",
     "pages": 110,
     "type": "próza",
@@ -132,7 +132,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Jaroslav DURYCH (1886-1962)",
+    "author": "Jaroslav DURYCH",
     "name": "Bloudění",
     "pages": 836,
     "type": "próza",
@@ -165,7 +165,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Ferdinand PEROUTKA (1895-1978)",
+    "author": "Ferdinand PEROUTKA",
     "name": "Budování státu",
     "pages": 1830,
     "type": "próza",
@@ -176,7 +176,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jakub DEML (1878-1961)",
+    "author": "Jakub DEML",
     "name": "Zapomenuté světlo",
     "pages": 144,
     "type": "próza",
@@ -187,7 +187,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jan ČEP (1902-1974)",
+    "author": "Jan ČEP",
     "name": "Hranice stínu",
     "pages": 251,
     "type": "próza",
@@ -198,7 +198,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Ondřej SEKORA (1899-1967)",
+    "author": "Ondřej SEKORA",
     "name": "Ferda Mravenec",
     "pages": 70,
     "type": "próza",
@@ -220,7 +220,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jarmila GLAZAROVÁ (1901-1977)",
+    "author": "Jarmila GLAZAROVÁ",
     "name": "Vlčí jáma",
     "pages": 256,
     "type": "próza",
@@ -231,7 +231,7 @@
     "images": "FALSE"
   },
   {
-    "author": "František KOŽÍK (1909-1997)",
+    "author": "František KOŽÍK",
     "name": "Největší z pierotů",
     "pages": 419,
     "type": "próza",
@@ -253,7 +253,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jaroslav FOGLAR (1907-1999)",
+    "author": "Jaroslav FOGLAR",
     "name": "Záhada hlavolamu",
     "pages": 192,
     "type": "próza",
@@ -264,7 +264,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Zdeněk JIROTKA (1911-2003)",
+    "author": "Zdeněk JIROTKA",
     "name": "Saturnin",
     "pages": 215,
     "type": "próza",
@@ -286,7 +286,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Jaroslav HAVLÍČEK (1896-1943)",
+    "author": "Jaroslav HAVLÍČEK",
     "name": "Petrolejové lampy",
     "pages": 280,
     "type": "próza",
@@ -297,7 +297,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jiří WEIL (1900-1959)",
+    "author": "Jiří WEIL",
     "name": "Život s hvězdou",
     "pages": 238,
     "type": "próza",
@@ -308,8 +308,8 @@
     "images": "FALSE"
   },
   {
-    "author": "Karel POLÁČEK (1892-1944)",
-    "name": "Bylo nás pět (vydáno posmrtně)",
+    "author": "Karel POLÁČEK",
+    "name": "Bylo nás pět",
     "pages": 220,
     "type": "próza",
     "categories": "román, literatura pro deti, humoristický román",
@@ -330,8 +330,8 @@
     "images": "FALSE"
   },
   {
-    "author": "Jan HANČ (1916-1963)",
-    "name": "Události (vydáno posmrtně)",
+    "author": "Jan HANČ",
+    "name": "Události",
     "pages": 250,
     "type": "próza",
     "categories": "deníky",
@@ -341,8 +341,8 @@
     "images": "FALSE"
   },
   {
-    "author": "Jiří KOLÁŘ (1914-2002)",
-    "name": "Očitý svědek (vydáno v samizdatu 1969)",
+    "author": "Jiří KOLÁŘ",
+    "name": "Očitý svědek",
     "pages": 172,
     "type": "próza",
     "categories": "deníky",
@@ -352,7 +352,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Jaroslav SEIFERT (1901-1986)",
+    "author": "Jaroslav SEIFERT",
     "name": "Píseň o Viktorce",
     "pages": 60,
     "type": "poezie",
@@ -363,8 +363,8 @@
     "images": "TRUE"
   },
   {
-    "author": "Jan ZAHRADNÍČEK (1905-1960)",
-    "name": "Znamení moci (vydáno 1990)",
+    "author": "Jan ZAHRADNÍČEK",
+    "name": "Znamení moci",
     "pages": 35,
     "type": "poezie",
     "categories": "",
@@ -418,7 +418,7 @@
     "images": "TRUE"
   },
   {
-    "author": "František HRUBÍN (1910-1971)",
+    "author": "František HRUBÍN",
     "name": "Špalíček pohádek",
     "pages": 128,
     "type": "próza",
@@ -429,7 +429,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Josef ŠKVORECKÝ (1924-2012)",
+    "author": "Josef ŠKVORECKÝ",
     "name": "Zbabělci",
     "pages": 365,
     "type": "próza",
@@ -440,7 +440,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jiří SUCHÝ (1931)",
+    "author": "Jiří SUCHÝ",
     "name": "Člověk z půdy",
     "pages": 45,
     "type": "drama",
@@ -484,7 +484,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Václav HAVEL (1936-2011)",
+    "author": "Václav HAVEL",
     "name": "Zahradní slavnost",
     "pages": 78,
     "type": "drama",
@@ -495,7 +495,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Vladimír HOLAN (1905-1980)",
+    "author": "Vladimír HOLAN",
     "name": "Noc s Hamletem",
     "pages": 78,
     "type": "poezie",
@@ -517,7 +517,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Ladislav SMOČEK (1932)",
+    "author": "Ladislav SMOČEK",
     "name": "Podivné odpoledne dr. Zvonka Burkeho",
     "pages": 72,
     "type": "drama",
@@ -561,7 +561,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Václav ČTVRTEK (1911-1976)",
+    "author": "Václav ČTVRTEK",
     "name": "Rumcajs",
     "pages": 134,
     "type": "próza",
@@ -638,7 +638,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Vladimír KÖRNER (1939)",
+    "author": "Vladimír KÖRNER",
     "name": "Údolí včel",
     "pages": 150,
     "type": "próza",
@@ -660,7 +660,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Karel PECKA (1928-1997)",
+    "author": "Karel PECKA",
     "name": "Motáky nezvěstnému",
     "pages": 399,
     "type": "próza",
@@ -671,7 +671,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Ludvík VACULÍK (1926-2015)",
+    "author": "Ludvík VACULÍK",
     "name": "Český snář",
     "pages": 481,
     "type": "próza",
@@ -760,7 +760,7 @@
   },
   {
     "author": "Ota Filip",
-    "name": "Kavárna Slavia (sam.)",
+    "name": "Kavárna Slavia",
     "pages": 244,
     "type": "próza",
     "categories": "román",
@@ -792,8 +792,8 @@
     "images": "FALSE"
   },
   {
-    "author": "Jan ZÁBRANA (1931-1984)",
-    "name": "Celý život (vydáno posmrtně, 1992, 1993)",
+    "author": "Jan ZÁBRANA",
+    "name": "Celý život",
     "pages": 1046,
     "type": "próza",
     "categories": "deníky",
@@ -825,7 +825,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Vlastimil TŘEŠŇÁK (1950)",
+    "author": "Vlastimil TŘEŠŇÁK",
     "name": "Klíč je pod rohožkou",
     "pages": 498,
     "type": "próza",
@@ -836,7 +836,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Lubomír MARTÍNEK (1954)",
+    "author": "Lubomír MARTÍNEK",
     "name": "Palimpsest",
     "pages": 176,
     "type": "próza",
@@ -847,7 +847,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Josef TOPOL (1935-2015)",
+    "author": "Josef TOPOL",
     "name": "Básně",
     "pages": 431,
     "type": "poezie",
@@ -869,7 +869,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Ivan LANDSMANN (1949-2017)",
+    "author": "Ivan LANDSMANN",
     "name": "Pestré vrstvy",
     "pages": 499,
     "type": "próza",
@@ -902,7 +902,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Václav CÍLEK (1955)",
+    "author": "Václav CÍLEK",
     "name": "Krajiny vnitřní a vnější",
     "pages": 272,
     "type": "próza",
@@ -924,7 +924,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Jan NOVÁK (1953)",
+    "author": "Jan NOVÁK",
     "name": "Zatím dobrý",
     "pages": 800,
     "type": "próza",
@@ -958,7 +958,7 @@
   },
   {
     "author": "Jiří Voskovec – Jan Werich",
-    "name": "Korespondence I, II (2007 a 2008)",
+    "name": "Korespondence I, II",
     "pages": 352,
     "type": "próza",
     "categories": "biografický román, deníky",
@@ -979,7 +979,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Pavel ŠRUT (1940)",
+    "author": "Pavel ŠRUT",
     "name": "Lichožrouti",
     "pages": 232,
     "type": "próza",
@@ -990,7 +990,7 @@
     "images": "TRUE"
   },
   {
-    "author": "Kateřina TUČKOVÁ (1980)",
+    "author": "Kateřina TUČKOVÁ",
     "name": "Vyhnání Gerty Schnirch",
     "pages": 416,
     "type": "próza",
@@ -1001,7 +1001,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Miloš DOLEŽAL (1970)",
+    "author": "Miloš DOLEŽAL",
     "name": "Jako bychom dnes zemřít měli",
     "pages": 446,
     "type": "próza",
@@ -1023,7 +1023,7 @@
     "images": "FALSE"
   },
   {
-    "author": "Martin REINER (1964) ",
+    "author": "Martin REINER ",
     "name": "Básník (Román o Ivanu Blatném)",
     "pages": 600,
     "type": "próza",
