@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "fakin-chat",
+    "staging": "fakin-chat",
     "production": "kiskchat"
   }
 }
