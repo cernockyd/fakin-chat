@@ -19,6 +19,9 @@ if (!command) {
       }
       FetchMetadata();
       break;
+    case 'steal':
+      stealBookCover();
+      break;
     case 'process':
       ProcessMetadata();
       break;
@@ -26,6 +29,109 @@ if (!command) {
       return process.exit();
   }
 }
+
+// take data.json, scrape data from obalkyknih.cz and save it :-D
+function stealBookCover() {
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///–––– Steal Covers --–––-///');
+  console.log('///–––––––––––––––––––––––-///');
+
+  const Loader = require('bulk-html-loader');
+  const _ = require('lodash');
+  let data = require('./src/data.json');
+
+  let queue = [];
+  data.forEach(function(book, i) {
+    queue.push('https://www.obalkyknih.cz/view?isbn='+book.isbn);
+    // if (i < 9) {
+    // }
+  });
+
+ // Create a BulkHtmlLoader instance
+ const loader = new Loader()
+
+      .setMaxConcurrentConnections(1)
+
+     /**
+      * Custom warning callback (optional)
+      */
+      .onWarning(function(loaderItem, next){
+         console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+         next(loaderItem);
+       })
+
+     /**
+      * Custom error callback (optional)
+      */
+      .onError(function(loaderItem, next){
+         console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+         next(loaderItem);
+       })
+
+     /**
+      * Individual url load complete callback (optional)
+      * Here you can save the result to a database, process the result etc.
+      * Or you can just wait the the entire queue to finish and handle all the items in the final callback
+      */
+      .onItemLoadComplete(function(loaderItem, next){
+         //console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+         next(loaderItem);
+       })
+
+     /**
+      * Final callback once the queue completes
+      */
+      .load(queue, (err, loaderItems) => {
+
+       if(err){
+         throw err;
+       }
+
+       var results = [];
+       _.each(loaderItems, function(loaderItem) {
+
+          //console.log(loaderItem);
+
+             // Only process successful LoaderItems
+             if(loaderItem.getStatus() === Loader.LoaderItem.COMPLETE){
+
+                 // Results are essentially jQuery objects
+                 var $cheerio = loaderItem.getResult();
+
+                 // Print out the anchor text for all links on the loaded page
+                 $cheerio('#text a[data-lightbox="book-cover"]').filter(function() {
+                   var text = $cheerio(this).find('img').attr('src');
+                   if (text.includes('thumbnail')) {
+                       let url = loaderItem._url.substr(36);
+                       let obj = {};
+                       obj[url] = text;
+                       if (text.length) {
+                          results.push(obj);
+                        }
+                   }
+                 });
+               }
+             });
+
+       //Promise.all(loader).then((completed) => {
+
+      console.log('///–––––––––––––––––––––––-///');
+      console.log('///-----Write output-––––-///');
+      console.log('///–––––––––––––––––––––––-///');
+
+      fs.writeFile('./src/stealed-data.json', JSON.stringify(results), function (err) {
+        if (err) return console.log(err);
+        console.log('writing to ' + './src/stealed-data.json');
+      });
+
+      //});
+
+     });
+
+
+
+}
+
 
 function ProcessMetadata() {
   console.log('///–––––––––––––––––––––––-///');
@@ -144,6 +250,11 @@ function FetchMetadata() {
   console.log('///–––––––––––––––––––––––-///');
 
   var newData = data.map((async (item, i) => {
+
+      /*if (i !== 82) {
+        return item;
+      }*/
+
       var query = encodeURI(apiUrl+item.name+' '+item.author);
       console.log(query);
       const res = await fetch(query);
@@ -154,32 +265,48 @@ function FetchMetadata() {
 
       //console.log(volumeInfo);
 
+      let errors = [];
+
+      try {
+        newItem['isbn'] = !item.isbn ? volumeInfo.industryIdentifiers[0].identifier : item.isbn;
+      } catch(err) {
+        errors.push('isbn_error');
+      }
+
       try {
         newItem['description'] = volumeInfo.description;
       }
       catch(err) {
-        console.log(i, err);
+        errors.push('description_error');
       }
 
       try {
         newItem['selfLink'] = volumeInfo.selfLink;
       }
       catch(err) {
-        console.log(i, err);
+        errors.push('selfLink_error');
       }
 
       try {
         newItem['smallThumbnail'] = volumeInfo.imageLinks.smallThumbnail;
       }
       catch(err) {
-        console.log(i, err);
+        errors.push('smallThumbnail_error');
       }
 
       try {
         newItem['thumbnail'] = volumeInfo.imageLinks.thumbnail;
       }
       catch(err) {
-        console.log(i, err);
+        errors.push('thumbnail_error');
+      }
+
+      if (errors.length !== 0) {
+        console.log('');
+        console.log(item.name);
+        console.log(query);
+        console.log(errors);
+        console.log('');
       }
 
       return newItem;

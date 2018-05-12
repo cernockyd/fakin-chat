@@ -18,9 +18,11 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "look-alike": "^1.0.1",
+    "bulk-html-loader": "^1.0.23",
     "csv-parse": "^2.4.0",
     "fs": "^0.0.1-security",
+    "lodash": "^4.17.10",
+    "look-alike": "^1.0.1",
     "node-fetch": "^2.1.2"
   }
 }
