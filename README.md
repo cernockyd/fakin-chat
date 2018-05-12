@@ -1,5 +1,6 @@
 
-# fakin-chat
+# Fakin-chat
+Simple book recommendation chatbot rendered with [React](https://reactjs.org/).
 
 ## Get started
 
@@ -20,7 +21,7 @@ Run
 yarn start
 ```
 
-## Fetching books metadata
+## Prepare books metadata
 Books metadata are fetched from Google Books API.
 
 You may need to:
@@ -29,13 +30,20 @@ You may need to:
 - [Generate API key](https://support.google.com/cloud/answer/6158862)
 - Enable [Google Books API](https://console.cloud.google.com/apis/dashboard) within your project
 
-### Fetch metadata
+### Fetch basic metadata
 
 Call this with your Google Books API key to fetch data.
 - presumes that you have `raw.data.json` with books
 - outputs `src/data.json`
 ```bash
 node DataHelper.js fetch <GOOGLE BOOKS API KEY>
+```
+
+### Fetch book thumbnails
+Scrape obalkyknih.cz and steal book thumbnails.
+- mutates `src/data.json`
+```bash
+node DataHelper.js steal
 ```
 
 ### Process fetched data for recommendation operations
