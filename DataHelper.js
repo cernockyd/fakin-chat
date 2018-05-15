@@ -6,7 +6,10 @@ const args = process.argv;
 const command = args[2];
 const apiKey = args[3];
 
-// Command Routing
+
+/**
+ * CLI - Command Router
+ */
 if (!command) {
   console.log('pls add command');
   return process.exit();
@@ -20,7 +23,7 @@ if (!command) {
       FetchMetadata();
       break;
     case 'steal':
-      stealBookCover();
+      StealBookCover();
       break;
     case 'process':
       ProcessMetadata();
@@ -30,8 +33,12 @@ if (!command) {
   }
 }
 
-// take data.json, scrape data from obalkyknih.cz and save it :-D
-function stealBookCover() {
+
+/**
+ * StealBookCover
+ * take data.json, scrape data from obalkyknih.cz and save it :-D
+ */
+function StealBookCover() {
   console.log('///–––––––––––––––––––––––-///');
   console.log('///–––– Steal Covers --–––-///');
   console.log('///–––––––––––––––––––––––-///');
@@ -47,92 +54,77 @@ function stealBookCover() {
     // }
   });
 
- // Create a BulkHtmlLoader instance
- const loader = new Loader()
 
-      .setMaxConcurrentConnections(1)
+  const loader = new Loader()
 
-     /**
-      * Custom warning callback (optional)
-      */
-      .onWarning(function(loaderItem, next){
-         console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
-         next(loaderItem);
-       })
+    .setMaxConcurrentConnections(1)
 
-     /**
-      * Custom error callback (optional)
-      */
-      .onError(function(loaderItem, next){
-         console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
-         next(loaderItem);
-       })
+    .onWarning(function(loaderItem, next){
+      console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+      next(loaderItem);
+    })
 
-     /**
-      * Individual url load complete callback (optional)
-      * Here you can save the result to a database, process the result etc.
-      * Or you can just wait the the entire queue to finish and handle all the items in the final callback
-      */
-      .onItemLoadComplete(function(loaderItem, next){
-         //console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
-         next(loaderItem);
-       })
+    .onError(function(loaderItem, next){
+      console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+      next(loaderItem);
+    })
 
-     /**
-      * Final callback once the queue completes
-      */
-      .load(queue, (err, loaderItems) => {
+    .onItemLoadComplete(function(loaderItem, next){
+      next(loaderItem);
+    })
 
-       if(err){
-         throw err;
-       }
+    /**
+    * Final callback once the queue completes
+    */
+    .load(queue, (err, loaderItems) => {
 
-       var results = [];
-       _.each(loaderItems, function(loaderItem) {
+      if(err){
+      throw err;
+      }
 
-          //console.log(loaderItem);
+      var results = [];
+      _.each(loaderItems, function(loaderItem) {
 
-             // Only process successful LoaderItems
-             if(loaderItem.getStatus() === Loader.LoaderItem.COMPLETE){
+      //console.log(loaderItem);
 
-                 // Results are essentially jQuery objects
-                 var $cheerio = loaderItem.getResult();
+      // Only process successful LoaderItems
+      if (loaderItem.getStatus() === Loader.LoaderItem.COMPLETE) {
 
-                 // Print out the anchor text for all links on the loaded page
-                 $cheerio('#text a[data-lightbox="book-cover"]').filter(function() {
-                   var text = $cheerio(this).find('img').attr('src');
-                   if (text.includes('thumbnail')) {
-                       let url = loaderItem._url.substr(36);
-                       let obj = {};
-                       obj[url] = text;
-                       if (text.length) {
-                          results.push(obj);
-                        }
-                   }
-                 });
-               }
-             });
+        // Results are essentially jQuery objects
+        var $cheerio = loaderItem.getResult();
 
-       //Promise.all(loader).then((completed) => {
+        // Print out the anchor text for all links on the loaded page
+        $cheerio('#text a[data-lightbox="book-cover"]').filter(function() {
+          var text = $cheerio(this).find('img').attr('src');
 
-      console.log('///–––––––––––––––––––––––-///');
-      console.log('///-----Write output-––––-///');
-      console.log('///–––––––––––––––––––––––-///');
+          if (text.includes('thumbnail')) {
+            let url = loaderItem._url.substr(36);
+            let obj = {};
+            obj[url] = text;
+            if (text.length) {
+              results.push(obj);
+            }
+          }
+        });
+      }
+    } // end of load()
+  );
 
-      fs.writeFile('./src/stealed-data.json', JSON.stringify(results), function (err) {
-        if (err) return console.log(err);
-        console.log('writing to ' + './src/stealed-data.json');
-      });
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///-----Write output-––––-///');
+  console.log('///–––––––––––––––––––––––-///');
 
-      //});
-
-     });
-
-
+  fs.writeFile('./src/stealed-data.json', JSON.stringify(results), function (err) {
+    if (err) return console.log(err);
+      console.log('writing to ' + './src/stealed-data.json');
+    });
+  });
 
 }
 
-
+/**
+ * ProcessMetadata
+ */
 function ProcessMetadata() {
   console.log('///–––––––––––––––––––––––-///');
   console.log('///––––Process Metadata–––-///');
@@ -241,6 +233,10 @@ function ProcessMetadata() {
 
 }
 
+
+/**
+ * FetchMetadata
+ */
 function FetchMetadata() {
   var data = require('./raw.data.json');
   var apiUrl = 'https://www.googleapis.com/books/v1/volumes?key='+apiKey+'&maxResults=1&q=';
