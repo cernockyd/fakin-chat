@@ -20,6 +20,11 @@ export default {
     'ne.',
     'ne. :D'
   ],
+  end: [
+    'Snad se ti bude líbit :)',
+    'Příjemné čtení :)',
+    ':)',
+  ],
   SayHi3: [
     'Tak jo.',
     'Dobře.'
@@ -35,6 +40,11 @@ export default {
   mood: {
     questions: [
       'Jaké knihy vyhledáváš?'
+    ]
+  },
+  weights: {
+    questions: [
+      'Co je pro vás nejdůležitější?'
     ]
   },
   category: {
@@ -66,7 +76,7 @@ export default {
   },
   type: {
     questions: [
-      'Vyber, na co máš chuť',
+      'Vyber, co máš nejraději',
       'Vyber, co tě zajímá.',
       'Co je ti blízké?'
     ]

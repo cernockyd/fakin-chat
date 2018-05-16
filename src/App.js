@@ -86,6 +86,15 @@ const stepsWithState = (state) => {
       trigger: 'loop',
     },
     {
+      id: 'Actionweights',
+      options: [
+          { value: 0, label: 'Téma', trigger: 'loop' },
+          { value: 1, label: 'Žánr', trigger: 'loop' },
+          { value: 1, label: 'Jak se u knihy cítím', trigger: 'loop' },
+          { value: 2, label: 'Počet stran', trigger: 'loop' }
+      ],
+    },
+    {
       id: 'Actionpages',
       options: [
           { value: 1, label: GetRandomAnswer('pages', 'true'), trigger: 'loop' },
