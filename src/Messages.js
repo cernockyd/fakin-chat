@@ -3,7 +3,7 @@ export default {
     'Ahoj, já jsem robot Petr!',
     'Ahoj! jsem robotka Alice :)',
     'Čauko! jsem robotka Barbie :)',
-    'Zdravím :-) jsem robotka Alice.'
+    'Zdravím :-) jsem Dalibor.'
   ],
   SayHi2: [
     'Můžu vám doporučit knihu?',
@@ -37,7 +37,7 @@ export default {
       'Jaké knihy vyhledáváš?'
     ]
   },
-  categories: {
+  category: {
     questions: [
       'Jaký žánr máš nejraději?'
     ]
@@ -65,7 +65,9 @@ export default {
   },
   type: {
     questions: [
-      'Čteš poezii?'
+      'Vyber, na co máš chuť',
+      'Vyber, co tě zajímá.',
+      'Co je ti blízké?'
     ]
   },
   pages: {

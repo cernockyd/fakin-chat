@@ -107,12 +107,12 @@ const stepsWithState = (state) => {
           { value: 1, label: 'Příroda', trigger: 'loop' },
           { value: 2, label: 'Válka', trigger: 'loop' },
           { value: 3, label: 'Volnočasové aktivity', trigger: 'loop' },
-          { value: 4, label: 'Komunizmus', trigger: 'loop' },
+          { value: 4, label: 'Komunismus', trigger: 'loop' },
           { value: 5, label: 'Náboženství', trigger: 'loop' }
       ],
     },
     {
-      id: 'Actioncategories',
+      id: 'Actioncategory',
       options: [
         { value: 0, label: 'historický román', trigger: 'loop' },
         { value: 1, label: 'román', trigger: 'loop' },
@@ -176,7 +176,7 @@ class App extends Component {
         pages: null,
         type: null,
         theme: null,
-        categories: null,
+        category: null,
         mood: null,
         images: null
       },

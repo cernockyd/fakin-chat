@@ -8,7 +8,7 @@ export default async function Recommend(features, k) {
     const result = results[k-1];
 
     const fullResult = pureData.find(function(book) {
-      return book.name === result.name;
+      return book.id === result.id;
     });
 
     return fullResult;
