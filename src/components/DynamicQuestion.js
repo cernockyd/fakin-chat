@@ -1,7 +1,7 @@
 import { Loading } from 'react-simple-chatbot'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { GetRandomQuestion } from '../lib/MessagesHelper';
+import GetRandomMessage, { GetRandomQuestion } from '../lib/MessagesHelper';
 import Recommend from '../lib/Recommend';
 
 export default class DynamicQuestion extends Component {
@@ -69,13 +69,15 @@ export default class DynamicQuestion extends Component {
     } else if (!waitAnswer && nullFeatures.length === 0) {
 
       if (books.length === 0) {
-        const recommendation = Recommend(features, 1);
 
-        recommendation.then((result) => this.setRecommendaiton(result));
+        setTimeout(() => {
+          const recommendation = Recommend(features, 1);
+          recommendation.then((result) => this.setRecommendaiton(result));
+        }, 1500);
 
 
       } else {
-        this.setNextMessage('Konec', true);
+        this.setNextMessage(GetRandomMessage('end'), true);
       }
 
     }
