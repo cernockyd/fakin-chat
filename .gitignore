@@ -9,7 +9,6 @@
 # production
 /build
 
-/src/data.json
 
 # misc
 .DS_Store
