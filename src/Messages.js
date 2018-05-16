@@ -44,7 +44,8 @@ export default {
   },
   theme: {
     questions: [
-      'Jaké téma tě nějvíce zajímá?'
+      'Jaké z těchto témat nějvíce zajímá?',
+      'Které z témat tě nejvíce zajímá?'
     ]
   },
   images: {
