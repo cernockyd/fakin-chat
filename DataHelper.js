@@ -22,7 +22,10 @@ if (!command) {
       }
       FetchMetadata();
       break;
-    case 'steal':
+    case 'stealUrl':
+      StealBookUrl();
+      break;
+    case 'stealCover':
       StealBookCover();
       break;
     case 'process':
@@ -35,12 +38,12 @@ if (!command) {
 
 
 /**
- * StealBookCover
+ * StealBookUrl
  * take data.json, scrape data from obalkyknih.cz and save it :-D
  */
-function StealBookCover() {
+function StealBookUrl() {
   console.log('///–––––––––––––––––––––––-///');
-  console.log('///–––– Steal Covers --–––-///');
+  console.log('///–––– Steal Book Url --–––-///');
   console.log('///–––––––––––––––––––––––-///');
 
   const Loader = require('bulk-html-loader');
@@ -49,9 +52,10 @@ function StealBookCover() {
 
   let queue = [];
   data.forEach(function(book, i) {
-    queue.push('https://www.obalkyknih.cz/view?isbn='+book.isbn);
-    // if (i < 9) {
-    // }
+
+    let url = 'https://www.databazeknih.cz/search?q='+encodeURI(book.name);
+    queue.push(url);
+
   });
 
 
@@ -83,7 +87,7 @@ function StealBookCover() {
       }
 
       var results = [];
-      _.each(loaderItems, function(loaderItem) {
+      _.each(loaderItems, function(loaderItem, i) {
 
       //console.log(loaderItem);
 
@@ -94,30 +98,171 @@ function StealBookCover() {
         var $cheerio = loaderItem.getResult();
 
         // Print out the anchor text for all links on the loaded page
-        $cheerio('#text a[data-lightbox="book-cover"]').filter(function() {
-          var text = $cheerio(this).find('img').attr('src');
+        try {
+          if (typeof $cheerio('a.strong[type="book"]')[0].attribs.href !== 'undefined') {
+            let href = $cheerio('a.strong[type="book"]')[0].attribs.href;
 
-          if (text.includes('thumbnail')) {
-            let url = loaderItem._url.substr(36);
-            let obj = {};
-            obj[url] = text;
-            if (text.length) {
-              results.push(obj);
+            // check url from raw data
+            if (typeof data[i]['url'] === 'undefined') {
+              data[i]['url'] = 'https://www.databazeknih.cz/'+href;
             }
           }
-        });
+        } catch(err) {
+          // console.log(err);
+        }
+
       }
     } // end of load()
   );
 
   console.log('///–––––––––––––––––––––––-///');
+  console.log('///---- Missing URLS ––––-///');
+  console.log('///–––––––––––––––––––––––-///');
+  let checkData = data.filter((item, i) => {
+    return (typeof item.url === 'undefined')
+  });
+  let checkedData = checkData.map((item) => {
+    return item.name
+  });
+  console.log(checkedData);
+  console.log(data.map((item) => {
+    return {name: item.name, url: item.url};
+  }));
+
+  console.log('///–––––––––––––––––––––––-///');
   console.log('///-----Write output-––––-///');
   console.log('///–––––––––––––––––––––––-///');
 
-  fs.writeFile('./src/stealed-data.json', JSON.stringify(results), function (err) {
+  fs.writeFile('./src/data.json', JSON.stringify(data), function (err) {
     if (err) return console.log(err);
-      console.log('writing to ' + './src/stealed-data.json');
-    });
+      console.log('writing to ' + './src/data.json');
+  });
+
+  });
+
+}
+
+
+/**
+ * StealBookCover
+ * take data.json, scrape data from obalkyknih.cz and save it :-D
+ */
+function StealBookCover() {
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///–––– Steal Covers --–––-///');
+  console.log('///–––––––––––––––––––––––-///');
+
+  const Loader = require('bulk-html-loader');
+  const _ = require('lodash');
+  let data = require('./src/data.json');
+
+  let queue = [];
+  data.forEach(function(book, i) {
+      queue.push(book.url+'?show=alldesc');
+    //if (i < 1) {
+    //}
+  });
+
+
+  const loader = new Loader()
+
+    .setMaxConcurrentConnections(10)
+
+    .onWarning(function(loaderItem, next){
+      console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+      next(loaderItem);
+    })
+
+    .onError(function(loaderItem, next){
+      console.log(this.getProgressPercent() + '% ' + loaderItem._url); // [Object LoaderItem] Error {code} {description} {url}
+      next(loaderItem);
+    })
+
+    .onItemLoadComplete(function(loaderItem, next){
+      next(loaderItem);
+    })
+
+    /**
+    * Final callback once the queue completes
+    */
+    .load(queue, (err, loaderItems) => {
+
+      if(err){
+      throw err;
+      }
+
+      var results = [];
+      _.each(loaderItems, function(loaderItem, i) {
+
+      //console.log(loaderItem);
+
+      // Only process successful LoaderItems
+      if (loaderItem.getStatus() === Loader.LoaderItem.COMPLETE) {
+
+        // Results are essentially jQuery objects
+        var $cheerio = loaderItem.getResult();
+
+        // Print out the anchor text for all links on the loaded page
+
+
+        let img = '';
+        let description = '';
+
+        //img = $cheerio('img.kniha_img')[0].attribs.src;
+        //console.log(img);
+
+        try {
+          if (typeof $cheerio('a[rel="lightbox"]')[0] !== 'undefined' && typeof $cheerio('a[rel="lightbox"]')[0].attribs.href !== 'undefined') {
+            img = 'https://www.databazeknih.cz/'+$cheerio('a[rel="lightbox"]')[0].attribs.href;
+            data[i]['thumbnail'] = img;
+
+            console.log(img);
+
+          } else if (typeof $cheerio('img.kniha_img')[0].attribs.src !== 'undefined') {
+            img = $cheerio('img.kniha_img')[0].attribs.src;
+            data[i]['thumbnail'] = img;
+
+            console.log(img);
+
+          }
+
+          if (typeof $cheerio('p[itemprop="description"]') !== 'undefined') {
+            description = $cheerio('p[itemprop="description"]').text();
+            data[i]['description'] = description;
+          }
+
+        } catch(err) {
+          console.log(err);
+        }
+      }
+    } // end of load()
+  );
+
+
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///---Missing thumnails ––-///');
+  console.log('///–––––––––––––––––––––––-///');
+  let checkData = data.filter((item, i) => {
+    return (typeof item.thumnail === 'undefined' || typeof item.description === 'undefined')
+  });
+  let checkedData = checkData.map((item) => {
+    return item.name
+  });
+  console.log(checkedData);
+  console.log(data.map((item) => {
+    return {name: item.name, thumbnail: item.thumbnail, description: item.description};
+  }));
+
+
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///-----Write output-––––-///');
+  console.log('///–––––––––––––––––––––––-///');
+
+  fs.writeFile('./src/data.json', JSON.stringify(data), function (err) {
+    if (err) return console.log(err);
+      console.log('writing to ' + './src/data.json');
+  });
+
   });
 
 }
@@ -263,11 +408,20 @@ function FetchMetadata() {
 
       let errors = [];
 
-      try {
-        newItem['isbn'] = !item.isbn ? volumeInfo.industryIdentifiers[0].identifier : item.isbn;
+
+      /*try {
+        if (!item.isbn) {
+          let isbn = volumeInfo.industryIdentifiers.filter(function(identifier) {
+            return identifier.type === 'ISBN_13';
+          });
+
+          newItem['isbn'] = isbn[0].identifier;
+        } else {
+          newItem['isbn'] = item.isbn;
+        }
       } catch(err) {
         errors.push('isbn_error');
-      }
+      }*/
 
       try {
         newItem['description'] = volumeInfo.description;
@@ -304,6 +458,8 @@ function FetchMetadata() {
         console.log(errors);
         console.log('');
       }
+
+      //console.log(volumeInfo.industryIdentifiers);
 
       return newItem;
 
