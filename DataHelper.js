@@ -246,19 +246,26 @@ function StealBookCover() {
     return (typeof item.thumnail === 'undefined' || typeof item.description === 'undefined')
   });
   let checkedData = checkData.map((item) => {
-    return item.name
+    return {name: item.name}
   });
   console.log(checkedData);
   console.log(data.map((item) => {
     return {name: item.name, thumbnail: item.thumbnail, description: item.description};
   }));
 
+  console.log('///–––––––––––––––––––––––-///');
+  console.log('///---Assign IDs ––-///');
+  console.log('///–––––––––––––––––––––––-///');
+  const newData = data.map((item, i) => {
+    item.id = i+1;
+    return item;
+  });
 
   console.log('///–––––––––––––––––––––––-///');
   console.log('///-----Write output-––––-///');
   console.log('///–––––––––––––––––––––––-///');
 
-  fs.writeFile('./src/data.json', JSON.stringify(data), function (err) {
+  fs.writeFile('./src/data.json', JSON.stringify(newData), function (err) {
     if (err) return console.log(err);
       console.log('writing to ' + './src/data.json');
   });
@@ -275,7 +282,8 @@ function ProcessMetadata() {
   console.log('///––––Process Metadata–––-///');
   console.log('///–––––––––––––––––––––––-///');
 
-  var data = require('./src/data.json');
+
+  let data = require('./src/data.json');
 
   /**
    * Book Schema
@@ -299,7 +307,9 @@ function ProcessMetadata() {
   var possibleThemes = [];
 
   var newData = data.map(function(book, i) {
-    let { name, pages, type, categories, theme, mood, year, images } = book;
+    let { id, name, pages, type, categories, theme, mood, year, images } = book;
+
+
 
     pages = (pages > 200) ? 0 : 1;
     images = (images === 'TRUE') ? 0 : 1;
@@ -342,18 +352,60 @@ function ProcessMetadata() {
     // Todo: (hack) reduce array and create standalone item with each category
 
     return {
-      name,
+      id,
+      //name,
       pages,
       type,
-      categories: currentCategories[0],
-      theme: currentThemes[0],
+      categories: currentCategories,
+      themes: currentThemes,
       mood,
       images
     };
 
   });
 
-  fs.writeFile(outputFileProcessed, JSON.stringify(newData), function (err) {
+
+  let newDataHacked = [];
+
+  console.log(newData);
+
+  console.log('------------------');
+  console.log('------------------');
+  console.log('---- * HACK*  ----');
+  console.log('------------------');
+  console.log('------------------');
+  console.log('------------------');
+
+  // hack :D
+  newData.forEach(function(item, i) {
+    item.categories.forEach(function(category) {
+
+        item.themes.forEach(function(theme) {
+
+          newDataHacked.push({
+            id: item.id,
+            pages: item.pages,
+            type: item.type,
+            category: category,
+            theme: theme,
+            mood: item.mood,
+            images: item.images
+          });
+
+        });
+
+    });
+  });
+
+
+
+  console.log('------------------');
+
+  //console.log(newDataHacked);
+
+  console.log('------------------');
+
+  fs.writeFile(outputFileProcessed, JSON.stringify(newDataHacked), function (err) {
     if (err) return console.log(err);
     console.log('------------------');
     console.log('possibleCategories:');
@@ -367,7 +419,7 @@ function ProcessMetadata() {
     console.log('------------------');
     console.log('possibleMood:', possibleMood);
     console.log('------------------');
-    console.log('possiblThemes:', possibleThemes);
+    console.log('possibleThemes:', possibleThemes);
     console.log('------------------');
     var randomIndex = Math.floor(Math.random() * data.length);
     console.log('Old Data Sample:', data[randomIndex]);
