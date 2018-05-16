@@ -4,7 +4,7 @@ import alike from 'alike';
 
 export default async function Recommend(features, k) {
   try {
-    const results = await alike(features, recommendationData, {k: k, weights: {id:0, pages:0.2, type:0.2, category:0.2, theme:0.2, mood:0.2, images:0.2}});
+    const results = await alike(features, recommendationData, {k: k, weights: {id:0, pages:1/6, type:1/6, category:1/6, theme:1/6, mood:1/6, images:1/6}});
     const result = results[k-1];
 
     const fullResult = pureData.find(function(book) {
