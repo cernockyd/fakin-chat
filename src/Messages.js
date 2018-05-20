@@ -1,33 +1,34 @@
 export default {
   SayHi: [
     'Ahoj, já jsem robot Petr!',
-    'Ahoj! jsem robotka Alice :)',
-    'Čauko! jsem robotka Barbie :)',
-    'Zdravím :-) jsem Dalibor.'
+    'Ahoj! Jsem robotka Alice :)',
+    'Čauko! Jsem robotka Barbie :)',
+    'Zdravím :) Jsem Dalibor.'
   ],
   SayHi2: [
     'Můžu vám doporučit knihu?',
-    'Mohu vám pomoci s výběrem knihy ? :)',
-    'Pomohu ti vybrat knihu. Ano? :), nebude to bolet.'
+    'Mohu vám pomoci s výběrem knihy? :)',
+    'Pomohu ti vybrat knihu. Ano? Nebude to bolet. :)'
   ],
   yes1: [
     'Jasně!',
-    'Ano prosím!!!',
-    'Ano :-)'
+    'Ano, prosím!',
+    'Ano :)'
   ],
   no1: [
-    'Ne díky.',
-    'ne.',
-    'ne. :D'
+    'Ne, díky.',
+    'Ne.',
+    'Radši ne.'
   ],
   end: [
     'Snad se ti bude líbit :)',
-    'Příjemné čtení :)',
-    ':)',
+    'Příjemné čtení!',
+    'Užij si knihu! :)',
   ],
   SayHi3: [
     'Tak jo.',
-    'Dobře.'
+    'Dobře.',
+    'Okay.'
   ],
   SayHi4: [
     'Položím ti pár otázek.',
@@ -35,7 +36,8 @@ export default {
   ],
   dummy: [
     'Nevadí :(',
-    'Tak jo 😢',
+    'Tak snad příště.',
+    'No dobře...'
   ],
   mood: {
     questions: [
@@ -44,7 +46,7 @@ export default {
   },
   weights: {
     questions: [
-      'Co je pro vás nejdůležitější?'
+      'Co je pro tebe nejdůležitější?'
     ]
   },
   category: {
@@ -54,7 +56,7 @@ export default {
   },
   theme: {
     questions: [
-      'Jaké z těchto témat nějvíce zajímá?',
+      'Jaké z těchto témat tě nějvíce zajímá?',
       'Které z témat tě nejvíce zajímá?'
     ]
   },
@@ -64,13 +66,14 @@ export default {
     ],
     answers: {
       true: [
-        'ano',
+        'Ano.',
         'Ano!',
         'Jo.',
       ],
       false: [
-        'ne',
-        'raději bez obrázků',
+        'Ne',
+        'Raději bez obrázků.',
+        'Ani ne.'
       ]
     }
   },
@@ -87,14 +90,14 @@ export default {
     ],
     answers: {
       true: [
-        'ano',
-        'Jasně',
+        'Ano.',
+        'Jasně!',
         'Jo.',
       ],
       false: [
-        'ne',
-        'moc nečtu',
-        'čtu málo'
+        'Ne.',
+        'Moc nečtu...',
+        'Čtu málo.'
       ]
     }
   }
