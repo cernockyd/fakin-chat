@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import JSONPretty from 'react-json-pretty';
 import logo from './static/logo.png';
-import bot from './static/bot.png';
+import bot from './static/bot-alice.png';
+import './static/og-image.png';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
@@ -168,7 +169,7 @@ const theme = {
   headerBgColor: '#EF6C00',
   headerFontColor: '#fff',
   headerFontSize: '16px',
-  botBubbleColor: '#FF9900',
+  botBubbleColor: '#9900FF',
   botFontColor: '#fff',
   userBubbleColor: '#fff',
   userFontColor: '#000',
