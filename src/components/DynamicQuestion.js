@@ -33,6 +33,7 @@ export default class DynamicQuestion extends Component {
     let { actions } = this.props;
     const { setState, getState } = actions;
     let featureKey = '';
+    let featureActionKey = '';
     let waitAnswer = getState('waitAnswer');
     let currentContext = getState('currentContext');
     let features = getState('features');
@@ -41,26 +42,49 @@ export default class DynamicQuestion extends Component {
     let nullFeatures = [];
     nullFeatures = this.validateFeatures(features);
 
-    console.log(nullFeatures);
+
+    if (currentContext === 'category') {
+      switch (features.type) {
+        case 0:
+          featureActionKey = 'Proza';
+          break;
+        default:
+          featureActionKey = 'Drama';
+      }
+    }
 
     // think of this „if, else if“ block below as messages router
 
     // if not waiting for answer
     if (!waitAnswer && currentContext === '' && nullFeatures.length > 0) {
-      featureKey = this.getRandomFeature(nullFeatures);
+      if (features.type === null) {
+        featureKey = this.getRandomFeature(nullFeatures.filter(function(item) {
+          return item !== 'category';
+        }));
+      } else {
+        featureKey = this.getRandomFeature(nullFeatures);
+      }
+
       setState({ features, currentContext: featureKey, waitAnswer: true });
       this.setNextMessage(GetRandomQuestion(featureKey));
 
     } else if (currentContext !== '' && waitAnswer) {
-      featureKey = currentContext;
+      // next action
+
+      featureKey = featureActionKey+currentContext;
+
       setState({waitAnswer: false});
       this.setNextAction(featureKey);
 
     } else if (currentContext !== '' && !waitAnswer) {
+      // get value from last action
 
-      const key = 'Action'+currentContext;
+      const key = 'Action'+featureActionKey+currentContext;
       const lastValue = this.props.steps[key].value;
-      console.log(lastValue);
+      // if poezie
+      if (currentContext === 'type' && lastValue === 2) {
+        features['category'] = 5; // based on books metadata
+      }
       features[currentContext] = lastValue;
       setState({currentContext: '', features: features});
 

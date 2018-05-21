@@ -121,23 +121,27 @@ const stepsWithState = (state) => {
       ],
     },
     {
-      id: 'Actioncategory',
+      id: 'ActionProzacategory',
       options: [
         { value: 0, label: 'historický román', trigger: 'loop' },
         { value: 1, label: 'román', trigger: 'loop' },
         { value: 2, label: 'humoristický román', trigger: 'loop' },
-        { value: 3, label: 'komedie', trigger: 'loop' },
-        { value: 4, label: 'literatura náuční', trigger: 'loop' },
-        //{ value: 5, label: '', trigger: 'loop' },
-        { value: 6, label: 'literatura pro deti', trigger: 'loop' },
+        { value: 4, label: 'naučná literatura', trigger: 'loop' },
+        { value: 6, label: 'literatura pro děti', trigger: 'loop' },
         { value: 7, label: 'pohádky', trigger: 'loop' },
         { value: 8, label: 'biografický román', trigger: 'loop' },
         { value: 9, label: 'deníky', trigger: 'loop' },
         { value: 10, label: 'povídky', trigger: 'loop' },
-        { value: 11, label: 'absurdní drama', trigger: 'loop' },
         { value: 12, label: 'novela', trigger: 'loop' },
-        { value: 13, label: 'tragédie', trigger: 'loop' },
         { value: 14, label: 'duchovní literatura', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'ActionDramacategory',
+      options: [
+        { value: 3, label: 'komedie', trigger: 'loop' },
+        { value: 11, label: 'absurdní drama', trigger: 'loop' },
+        { value: 13, label: 'tragédie', trigger: 'loop' },
       ],
     },
     {
