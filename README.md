@@ -2,6 +2,8 @@
 # Fakin-chat
 Simple book recommendation chatbot rendered with [React](https://reactjs.org/).
 
+![screenshot](screenshot.png)
+
 ## Get started
 
 Be sure to have Node >= 6 installed.
@@ -68,7 +70,7 @@ node DataHelper.js process
 
 Change (select) enviroment
 ```bash
-firebase use default # default (for staging) or production
+firebase use staging # staging or production
 ```
 
 Deploy to selected enviroment
