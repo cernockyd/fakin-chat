@@ -2,20 +2,34 @@ import React, { Component } from 'react';
 import './App.css';
 import JSONPretty from 'react-json-pretty';
 import logo from './static/logo.png';
-import bot from './static/bot-alice.png';
+import avatarAlice from './static/bot-alice.png';
+import avatarBarbie from './static/bot-barbie.png';
+import avatarDalibor from './static/bot-dalibor.png';
+import avatarPetr from './static/bot-petr.png';
 import './static/og-image.png';
 import ChatBot from 'react-simple-chatbot';
 import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
 import Message from './components/Message';
 import Book from './components/Book';
-import GetRandomMessage, { GetRandomAnswer } from './lib/MessagesHelper';
+import GetRandomMessage, { GetMessageByName, GetRandomAnswer } from './lib/MessagesHelper';
 import { isLocalhost } from './registerServiceWorker';
 
-const SayHi = GetRandomMessage('SayHi');
+const identities = [
+  {name: 'petr', color: '#9900FF', avatar: avatarPetr},
+  {name: 'alice', color: '#f15668', avatar: avatarAlice},
+  {name: 'barbie', color: '#009900', avatar: avatarBarbie},
+  {name: 'dalibor', color: '#0099FF', avatar: avatarDalibor}
+];
+
+const identity = identities[Math.floor(Math.random() * identities.length)];
+
+const SayHi = GetMessageByName('SayHi', identity.name);
 const SayHi2 = GetRandomMessage('SayHi2');
 const SayHi3 = GetRandomMessage('SayHi3');
 const SayHi4 = GetRandomMessage('SayHi4');
+
+console.log(SayHi);
 
 const stepsWithState = (state) => {
   const time = isLocalhost ? 0 : 70;
@@ -48,8 +62,8 @@ const stepsWithState = (state) => {
     {
       id: 'ask1',
       options: [
-          { value: 'true', label: GetRandomMessage('yes1'), trigger: 'SayHi3' },
-          { value: 'false', label: GetRandomMessage('no1'), trigger: 'dummy' }
+          { value: 1, label: GetRandomMessage('yes1'), trigger: 'SayHi3' },
+          { value: 0, label: GetRandomMessage('no1'), trigger: 'loop' }
       ],
     },
     {
@@ -78,7 +92,8 @@ const stepsWithState = (state) => {
       id: 'showMessageEnd',
       component: <Message messages={state.messages} />,
       asMessage: true,
-      end: true,
+      trigger: 'loop'
+      //end: true,
     },
     {
       id: 'showBook',
@@ -100,6 +115,19 @@ const stepsWithState = (state) => {
       options: [
           { value: 1, label: GetRandomAnswer('pages', 'true'), trigger: 'loop' },
           { value: 0, label: GetRandomAnswer('pages', 'false'), trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'Actionend',
+      options: [
+          { value: 0, label: 'Doporučit jinou knihu', trigger: 'loop' },
+          { value: 1, label: 'Začít znovu', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'ActionendReload',
+      options: [
+          { value: 1, label: 'Začít znovu', trigger: 'loop' }
       ],
     },
     {
@@ -148,7 +176,7 @@ const stepsWithState = (state) => {
     {
       id: 'Actionmood',
       options: [
-          { value: 1, label: 'Šťastné', trigger: 'loop' },
+          { value: 1, label: GetRandomMessage('moodHappy'), trigger: 'loop' },
           { value: 2, label: 'Smutné', trigger: 'loop' },
           { value: 0, label: 'Něco mezi', trigger: 'loop' }
       ],
@@ -169,7 +197,7 @@ const theme = {
   headerBgColor: '#EF6C00',
   headerFontColor: '#fff',
   headerFontSize: '16px',
-  botBubbleColor: '#9900FF',
+  botBubbleColor: identity.color,
   botFontColor: '#fff',
   userBubbleColor: '#fff',
   userFontColor: '#000',
@@ -189,6 +217,7 @@ class App extends Component {
         mood: null,
         images: null
       },
+      end: 0,
       currentContext: '',
       waitAnswer: false,
       messages: [],
@@ -220,7 +249,7 @@ class App extends Component {
             hideHeader
             footerStyle={{display: 'none'}}
             hideUserAvatar
-            botAvatar={bot}
+            botAvatar={identity.avatar}
             avatarStyle={{
               "WebkitAnimation": "Lmuha .3s ease forwards",
               "animation": "Lmuha .3s ease forwards",

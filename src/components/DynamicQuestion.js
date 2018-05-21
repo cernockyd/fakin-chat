@@ -32,11 +32,27 @@ export default class DynamicQuestion extends Component {
   messageController() {
     let { actions } = this.props;
     const { setState, getState } = actions;
+    let features = getState('features');
+    const ask1Value = this.props.steps['ask1'].value;
+    if (ask1Value === 0) {
+      features = {
+        pages: this.getRandomBetween(1),
+        type: this.getRandomBetween(2),
+        theme: this.getRandomBetween(5),
+        category: this.getRandomBetween(14),
+        mood: this.getRandomBetween(2),
+        images: this.getRandomBetween(1)
+      };
+      setState({features: features});
+    } else {
+
+    }
+
     let featureKey = '';
     let featureActionKey = '';
     let waitAnswer = getState('waitAnswer');
     let currentContext = getState('currentContext');
-    let features = getState('features');
+    let end = getState('end');
     let books = getState('books');
 
     let nullFeatures = [];
@@ -92,18 +108,54 @@ export default class DynamicQuestion extends Component {
 
     } else if (!waitAnswer && nullFeatures.length === 0) {
 
-      if (books.length === 0) {
+      switch (end) {
+        case 0:
+          const k = books.length;
+          setTimeout(() => {
+            const recommendation = Recommend(features, k+1);
+            recommendation.then((result) => this.setRecommendaiton(result));
+          }, 1500);
+          if (k === 0) {
+            setState({end: 1});
+          } else {
+            setState({end: 2});
+          }
+          break;
+        case 1:
+          if (books.length === 1) {
+            if (ask1Value === 0) {
+              this.setNextMessage(GetRandomMessage('endAlternate'));
+            } else {
+              this.setNextMessage(GetRandomMessage('end'));
+            }
+          }
+          setState({end: 2});
+          break;
+        case 2:
+          setState({end: 3});
+          if (books.length === 3) {
+            this.setNextAction('endReload');
+          } else {
+            this.setNextAction('end');
+          }
+          break;
+        case 3:
+          let lastValue = 1;
+          if (books.length === 3) {
+            lastValue = this.props.steps['ActionendReload'].value;
+          } else {
+            lastValue = this.props.steps['Actionend'].value;
+          }
 
-        setTimeout(() => {
-          const recommendation = Recommend(features, 1);
-          recommendation.then((result) => this.setRecommendaiton(result));
-        }, 1500);
+          if (lastValue === 0) {
+            setState({end: 0});
+            this.props.triggerNextStep();
+          } else {
+            window.location.reload();
+          }
 
-
-      } else {
-        this.setNextMessage(GetRandomMessage('end'), true);
+          break;
       }
-
     }
 
     //this.setMessage(GetRandomMessage(featureKey));
@@ -141,6 +193,10 @@ export default class DynamicQuestion extends Component {
     if (book) {
       this.props.triggerNextStep({ trigger: 'showBook', value: null });
     }
+  }
+
+  getRandomBetween(max) {
+    return Math.floor(Math.random() * max);
   }
 
   setNextMessage(message, end = false) {

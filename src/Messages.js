@@ -1,10 +1,10 @@
 export default {
-  SayHi: [
-    'Ahoj, já jsem robot Petr!',
-    'Ahoj! Jsem robotka Alice :)',
-    'Čauko! Jsem robotka Barbie :)',
-    'Zdravím :) Jsem Dalibor.'
-  ],
+  SayHi: {
+    petr: 'Ahoj, já jsem robot Petr!',
+    alice: 'Ahoj! Jsem robotka Alice :)',
+    barbie: 'Čauko! Jsem robotka Barbie :)',
+    dalibor: 'Zdravím :) Jsem Dalibor.'
+  },
   SayHi2: [
     'Můžu vám doporučit knihu?',
     'Mohu vám pomoci s výběrem knihy? :)',
@@ -20,10 +20,17 @@ export default {
     'Ne.',
     'Radši ne.'
   ],
+  moodHappy: [
+    'Veselé',
+    'Šťastné'
+  ],
   end: [
     'Snad se ti bude líbit :)',
     'Příjemné čtení!',
     'Užij si knihu! :)',
+  ],
+  endAlternate: [
+    'Nevadí :)) tady jednu stejně máš.',
   ],
   SayHi3: [
     'Tak jo.',
