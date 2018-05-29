@@ -1,54 +1,58 @@
 export default {
   SayHi: {
-    petr: 'Ahoj, já jsem robot Petr!',
-    alice: 'Ahoj! Jsem robotka Alice :)',
-    barbie: 'Čauko! Jsem robotka Barbie :)',
-    dalibor: 'Zdravím :) Jsem Dalibor.'
+    petr: 'Dobrý den, já jsem robot Petr!',
+    alice: 'Ahoj, jsem robotka Alice :)',
+    barbie: 'Dobrý den! Jsem robotka Barbora :)',
+    dalibor: 'Zdravím Vás :) Jsem Dalibor.'
   },
   SayHi2: [
-    'Můžu vám doporučit knihu?',
-    'Mohu vám pomoci s výběrem knihy? :)',
-    'Pomohu ti vybrat knihu. Ano? Nebude to bolet. :)'
+    'Mohu Vám doporučit jednu z vystavených knih Knihovny Jiřího Mahena? Zabere to jen chvíli.',
+    'Mohu Vám pomoci s výběrem knihy z výsavy 100 let 100 knih? Zabere to jen chvíli :)'
   ],
   yes1: [
-    'Jasně!',
+    'Určitě!',
     'Ano, prosím!',
     'Ano :)'
   ],
   no1: [
-    'Ne, díky.',
+    'Ne, děkuji.',
     'Ne.',
-    'Radši ne.'
+    'Raději ne.'
   ],
   moodHappy: [
     'Veselé',
     'Šťastné'
   ],
   end: [
-    'Snad se ti bude líbit :)',
-    'Příjemné čtení!',
-    'Užij si knihu! :)',
+    'Snad se Vám bude líbit :)',
+    'Přeji Vám příjemné čtení!',
+    'Užijte si knihu! :)',
+  ],
+  endInfo: [
+    'Kniha je označena rokem vydání. Knihu tak na výstavě snadno najdete :)',
+    'Pomocí roku vydání knihu snadno najdete na výstavě 100 let 100 knih.',
   ],
   endAlternate: [
-    'Nevadí :)) tady jednu stejně máš.',
+    'Nevadí :) tady stejně jednu máte.',
   ],
   SayHi3: [
-    'Tak jo.',
+    'Dobrý tedy.',
     'Dobře.',
     'Okay.'
   ],
   SayHi4: [
-    'Položím ti pár otázek.',
-    'Na něco se tě zeptám.'
+    'Položím Vám pár otázek. Podle Vašich odpovědí se pokusím najít knihu, která bude nejvíce odpovídat vašim preferencím.',
+    'Zeptám se Vás na několik otázek. Poté se pokusím najít knihu, která bude nejvíce odpovídat Vašim odpovědím.',
+    'Položím Vám několik dotazů a podle toho, jak odpovíte, se pokusím vybrat knihu.'
   ],
   dummy: [
     'Nevadí :(',
     'Tak snad příště.',
-    'No dobře...'
+    'Dobře...'
   ],
   mood: {
     questions: [
-      'Jaké knihy vyhledáváš?'
+      'Které knihy vyhledáváte?'
     ]
   },
   weights: {
@@ -58,18 +62,18 @@ export default {
   },
   category: {
     questions: [
-      'Jaký žánr máš nejraději?'
+      'Jaký žánr máte nejraději?'
     ]
   },
   theme: {
     questions: [
-      'Jaké z těchto témat tě nějvíce zajímá?',
-      'Které z témat tě nejvíce zajímá?'
+      'Které z těchto témat Vás nějvíce zajímá?',
+      'Které z témat Vás nejvíce zajímá?'
     ]
   },
   images: {
     questions: [
-      'Upřednostňuješ ilustrované knihy?'
+      'Upřednostňujete ilustrované knihy?'
     ],
     answers: {
       true: [
@@ -86,19 +90,19 @@ export default {
   },
   type: {
     questions: [
-      'Vyber, co máš nejraději',
-      'Vyber, co tě zajímá.',
-      'Co je ti blízké?'
+      'Vyber, co máte nejraději',
+      'Vyber, co Vás zajímá.',
+      'Co je Vám blízké?'
     ]
   },
   pages: {
     questions: [
-      'Považuješ se za častého čtenáře?'
+      'Považujete se za častého čtenáře?'
     ],
     answers: {
       true: [
         'Ano.',
-        'Jasně!',
+        'Jistě!',
         'Jo.',
       ],
       false: [
