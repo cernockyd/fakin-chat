@@ -26,6 +26,7 @@ export default class DynamicQuestion extends Component {
     this.setNextMessage = this.setNextMessage.bind(this);
     this.setNextAction = this.setNextAction.bind(this);
     this.setRecommendaiton = this.setRecommendaiton.bind(this);
+    this.setBookDescription = this.setBookDescription.bind(this);
     this.messageController = this.messageController.bind(this);
   }
 
@@ -51,6 +52,7 @@ export default class DynamicQuestion extends Component {
     let featureKey = '';
     let featureActionKey = '';
     let waitAnswer = getState('waitAnswer');
+    let isDetail = getState('isDetail');
     let currentContext = getState('currentContext');
     let end = getState('end');
     let books = getState('books');
@@ -116,9 +118,9 @@ export default class DynamicQuestion extends Component {
             recommendation.then((result) => this.setRecommendaiton(result));
           }, 1500);
           if (k === 0) {
-            setState({end: 1});
+            setState({end: 1, isDetail: true});
           } else {
-            setState({end: 2});
+            setState({end: 2, isDetail: true});
           }
           break;
         case 1:
@@ -129,7 +131,19 @@ export default class DynamicQuestion extends Component {
               this.setNextMessage(GetRandomMessage('end'));
             }
           }
+          setState({end: 5});
+          break;
+        case 5:
+          this.setNextMessage(GetRandomMessage('endInfo'));
           setState({end: 2});
+          break;
+        case 6:
+          setState({end: 3});
+          if (books.length === 3) {
+            this.setNextAction('endReloadNoDetail');
+          } else {
+            this.setNextAction('endNoDetail');
+          }
           break;
         case 2:
           setState({end: 3});
@@ -142,16 +156,31 @@ export default class DynamicQuestion extends Component {
         case 3:
           let lastValue = 1;
           if (books.length === 3) {
-            lastValue = this.props.steps['ActionendReload'].value;
+            if (isDetail) {
+              lastValue = this.props.steps['ActionendReload'].value;
+            } else {
+              lastValue = this.props.steps['ActionendReloadNoDetail'].value;
+            }
           } else {
-            lastValue = this.props.steps['Actionend'].value;
+            if (isDetail) {
+              lastValue = this.props.steps['Actionend'].value;
+            } else {
+              lastValue = this.props.steps['ActionendNoDetail'].value;
+            }
           }
 
-          if (lastValue === 0) {
-            setState({end: 0});
-            this.props.triggerNextStep();
-          } else {
-            window.location.reload();
+          switch (lastValue) {
+            case 0:
+              setState({end: 0});
+              this.props.triggerNextStep();
+              break;
+            case 1:
+              window.location.reload();
+              break;
+            case 2:
+              setState({end: 6, isDetail: false});
+              this.setBookDescription();
+              break;
           }
 
           break;
@@ -193,6 +222,10 @@ export default class DynamicQuestion extends Component {
     if (book) {
       this.props.triggerNextStep({ trigger: 'showBook', value: null });
     }
+  }
+
+  setBookDescription() {
+    this.props.triggerNextStep({ trigger: 'showBookDescription', value: null });
   }
 
   getRandomBetween(max) {

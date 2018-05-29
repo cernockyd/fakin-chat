@@ -12,6 +12,7 @@ import { ThemeProvider } from 'styled-components';
 import DynamicQuestion from './components/DynamicQuestion';
 import Message from './components/Message';
 import Book from './components/Book';
+import BookDescription from './components/BookDescription';
 import GetRandomMessage, { GetMessageByName, GetRandomAnswer } from './lib/MessagesHelper';
 import { isLocalhost } from './registerServiceWorker';
 
@@ -102,6 +103,12 @@ const stepsWithState = (state) => {
       trigger: 'loop',
     },
     {
+      id: 'showBookDescription',
+      component: <BookDescription books={state.books} />,
+      asMessage: false,
+      trigger: 'loop',
+    },
+    {
       id: 'Actionweights',
       options: [
           { value: 0, label: 'Téma', trigger: 'loop' },
@@ -120,12 +127,27 @@ const stepsWithState = (state) => {
     {
       id: 'Actionend',
       options: [
-          { value: 0, label: 'Doporučit jinou knihu', trigger: 'loop' },
+          { value: 2, label: 'Chci více o knize', trigger: 'loop' },
+          { value: 0, label: 'Tato kniha se mi nelíbí', trigger: 'loop' },
           { value: 1, label: 'Začít znovu', trigger: 'loop' }
       ],
     },
     {
       id: 'ActionendReload',
+      options: [
+          { value: 2, label: 'Chci více o knize', trigger: 'loop' },
+          { value: 1, label: 'Začít znovu', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'ActionendNoDetail',
+      options: [
+          { value: 0, label: 'Tato kniha se mi nelíbí', trigger: 'loop' },
+          { value: 1, label: 'Začít znovu', trigger: 'loop' }
+      ],
+    },
+    {
+      id: 'ActionendReloadNoDetail',
       options: [
           { value: 1, label: 'Začít znovu', trigger: 'loop' }
       ],
@@ -152,25 +174,25 @@ const stepsWithState = (state) => {
     {
       id: 'ActionProzacategory',
       options: [
-        { value: 0, label: 'historický román', trigger: 'loop' },
-        { value: 1, label: 'román', trigger: 'loop' },
-        { value: 2, label: 'humoristický román', trigger: 'loop' },
-        { value: 4, label: 'naučná literatura', trigger: 'loop' },
-        { value: 6, label: 'literatura pro děti', trigger: 'loop' },
-        { value: 7, label: 'pohádky', trigger: 'loop' },
-        { value: 8, label: 'biografický román', trigger: 'loop' },
-        { value: 9, label: 'deníky', trigger: 'loop' },
-        { value: 10, label: 'povídky', trigger: 'loop' },
-        { value: 12, label: 'novela', trigger: 'loop' },
-        { value: 14, label: 'duchovní literatura', trigger: 'loop' }
+        { value: 0, label: 'Historický román', trigger: 'loop' },
+        { value: 1, label: 'Román', trigger: 'loop' },
+        { value: 2, label: 'Humoristický román', trigger: 'loop' },
+        { value: 4, label: 'Naučná literatura', trigger: 'loop' },
+        { value: 6, label: 'Literatura pro děti', trigger: 'loop' },
+        { value: 7, label: 'Pohádky', trigger: 'loop' },
+        { value: 8, label: 'Biografický román', trigger: 'loop' },
+        { value: 9, label: 'Deníky', trigger: 'loop' },
+        { value: 10, label: 'Povídky', trigger: 'loop' },
+        { value: 12, label: 'Novela', trigger: 'loop' },
+        { value: 14, label: 'Duchovní literatura', trigger: 'loop' }
       ],
     },
     {
       id: 'ActionDramacategory',
       options: [
-        { value: 3, label: 'komedie', trigger: 'loop' },
-        { value: 11, label: 'absurdní drama', trigger: 'loop' },
-        { value: 13, label: 'tragédie', trigger: 'loop' },
+        { value: 3, label: 'Komedie', trigger: 'loop' },
+        { value: 11, label: 'Absurdní drama', trigger: 'loop' },
+        { value: 13, label: 'Tragédie', trigger: 'loop' },
       ],
     },
     {
@@ -217,6 +239,7 @@ class App extends Component {
         mood: null,
         images: null
       },
+      isDetail: true,
       end: 0,
       currentContext: '',
       waitAnswer: false,

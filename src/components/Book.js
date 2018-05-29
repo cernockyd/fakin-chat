@@ -13,18 +13,18 @@ class Book extends Component {
   }
 
   render() {
-    const { thumbnail, name, author, description } = this.state.book;
+    const { thumbnail, name, author, year, description } = this.state.book;
 
     return (
       <div className="recommendation">
         { thumbnail &&
           <div className="img-wrapper">
-            <div className="img" style={{backgroundImage: 'url('+thumbnail+')'}}></div>
+            { year && <div className="year">{year}</div> }
+            <img class="img" src={thumbnail} />
           </div>
         }
         <h2 className="headline">{name}</h2>
         <p className="author">{author}</p>
-        { description && <p className="description">{ description.length > 140 ? <span>{description.substr(0, 140)}&hellip;</span> : description  }</p> }
       </div>
     )
   }
