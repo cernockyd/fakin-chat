@@ -7,7 +7,7 @@ export default {
   },
   SayHi2: [
     'Mohu Vám doporučit jednu z vystavených knih Knihovny Jiřího Mahena? Zabere to jen chvíli.',
-    'Mohu Vám pomoci s výběrem knihy z výsavy 100 let 100 knih? Zabere to jen chvíli :)'
+    'Mohu Vám pomoci s výběrem knihy z výstavy 100 let 100 knih? Zabere to jen chvíli :)'
   ],
   yes1: [
     'Určitě!',
@@ -36,9 +36,8 @@ export default {
     'Nevadí :) tady stejně jednu máte.',
   ],
   SayHi3: [
-    'Dobrý tedy.',
+    'Dobře tedy.',
     'Dobře.',
-    'Okay.'
   ],
   SayHi4: [
     'Položím Vám pár otázek. Podle Vašich odpovědí se pokusím najít knihu, která bude nejvíce odpovídat vašim preferencím.',
@@ -78,8 +77,7 @@ export default {
     answers: {
       true: [
         'Ano.',
-        'Ano!',
-        'Jo.',
+        'Ano!'
       ],
       false: [
         'Ne',
@@ -90,8 +88,8 @@ export default {
   },
   type: {
     questions: [
-      'Vyber, co máte nejraději',
-      'Vyber, co Vás zajímá.',
+      'Vyberte, co máte nejraději',
+      'Vyberte, co Vás zajímá.',
       'Co je Vám blízké?'
     ]
   },
