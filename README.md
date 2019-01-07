@@ -1,10 +1,9 @@
 
 # Fakin-chat
-Simple book recommendation chatbot rendered with [React](https://reactjs.org/).
+Simple chatbot which recommends Czech books from [100 Years, 100 Books exhibition](https://www.gotobrno.cz/en/actions/100-let-100-knih/).
 
 ![screenshot](screenshot.png)
 
-Dialogue logic is written very poorly, yet it still fits needs for this project. 
 
 ## Get started
 
