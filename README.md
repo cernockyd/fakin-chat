@@ -4,6 +4,8 @@ Simple book recommendation chatbot rendered with [React](https://reactjs.org/).
 
 ![screenshot](screenshot.png)
 
+Dialogue logic is written very poorly, yet it still fits needs for this project. 
+
 ## Get started
 
 Be sure to have Node >= 6 installed.
